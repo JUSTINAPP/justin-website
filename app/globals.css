@@ -32,3 +32,11 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+
+@utility scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

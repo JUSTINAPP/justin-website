@@ -18,17 +18,17 @@ export default function Nav() {
         scrolled ? 'bg-white/95 shadow-sm' : 'bg-transparent'
       }`}
     >
-      <div className="flex flex-col items-center py-2 px-6">
+      <div className="flex flex-col items-center py-1.5 px-6">
         <Image
           src="/assets/justin-logo-no-background.png"
           alt="Justin"
-          width={200}
-          height={64}
-          className="h-16 w-auto object-contain"
+          width={260}
+          height={88}
+          className="h-[88px] w-auto object-contain"
         />
         <p
-          className={`font-nunito text-xs tracking-widest transition-colors duration-300 ${
-            scrolled ? 'text-brand-purple/70' : 'text-white/80'
+          className={`font-nunito text-sm tracking-wider transition-colors duration-300 ${
+            scrolled ? 'text-brand-purple/70' : 'text-white/85'
           }`}
         >
           Just in case, Just in time, Just in touch.

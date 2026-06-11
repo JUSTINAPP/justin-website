@@ -20,19 +20,21 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="bg-white py-20 px-6">
+    <section className="bg-white py-12 px-6">
       <div className="max-w-5xl mx-auto">
         <p className="text-brand-purple uppercase tracking-widest text-sm mb-3 font-nunito font-semibold">
           What people say
         </p>
-        <h2 className="font-nunito font-bold text-4xl text-brand-deep mb-12">
+        <h2 className="font-nunito font-bold text-4xl text-brand-deep mb-8">
           Heard from people who&apos;ve used it
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        {/* Mobile carousel / Desktop grid */}
+        <div className="scrollbar-hide -mx-6 flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 md:mx-0 md:grid md:grid-cols-3 md:gap-8 md:overflow-visible md:snap-none">
           {testimonials.map((t) => (
             <div
               key={t.name}
-              className="bg-brand-light rounded-2xl p-8 border-t-4 border-brand-rose"
+              className="snap-center shrink-0 min-w-[80vw] first:ml-6 last:mr-6 md:min-w-0 md:first:ml-0 md:last:mr-0 bg-brand-light rounded-2xl p-8 border-t-4 border-brand-rose"
             >
               <p className="italic text-gray-600 text-base leading-relaxed mb-6">
                 &ldquo;{t.quote}&rdquo;
