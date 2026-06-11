@@ -23,14 +23,18 @@ export default function Nav() {
         <Image
           src="/assets/justin-logo-no-background.png"
           alt="Justin"
-          width={180}
-          height={72}
+          width={120}
+          height={48}
           className="object-contain"
         />
 
         <a
           href="#download"
-          className="hidden md:inline-flex items-center bg-brand-purple text-white px-6 py-2.5 rounded-full font-nunito font-semibold text-sm hover:bg-brand-deep transition-colors"
+          className={`hidden md:inline-flex items-center px-6 py-2.5 rounded-full font-nunito font-semibold text-sm transition-colors duration-300 ${
+            scrolled
+              ? 'bg-brand-purple text-white hover:bg-brand-deep'
+              : 'bg-white text-brand-purple hover:bg-white/90'
+          }`}
         >
           Download App
         </a>

@@ -19,7 +19,9 @@ export default function AppStoreButtons({ centered = false }: { centered?: boole
   return (
     <div className={wrapperClass}>
       <a
-        href="#"
+        href="https://apps.apple.com/au/app/justin/id1597447761"
+        target="_blank"
+        rel="noopener noreferrer"
         className="flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-full hover:bg-gray-900 transition-colors"
       >
         <AppleIcon />

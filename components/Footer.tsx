@@ -4,15 +4,13 @@ export default function Footer() {
   return (
     <footer className="bg-brand-deep py-12 px-6">
       <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
-        <div className="relative h-12 w-36 mb-6">
-          <Image
-            src="/assets/justin-logo-no-background.png"
-            alt="Justin"
-            fill
-            className="object-contain"
-            sizes="144px"
-          />
-        </div>
+        <Image
+          src="/assets/justin-logo-no-background.png"
+          alt="Justin"
+          width={240}
+          height={96}
+          className="h-24 w-auto object-contain mb-6"
+        />
         <div className="flex items-center gap-6 text-white/40 text-sm">
           <a href="#" className="hover:text-white/70 transition-colors">
             Privacy Policy
