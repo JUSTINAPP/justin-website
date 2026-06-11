@@ -31,7 +31,7 @@ export default function AppStoreButtons({ centered = false }: { centered?: boole
         </div>
       </a>
       <a
-        href="#"
+        href="/coming-soon"
         className="flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-full hover:bg-gray-900 transition-colors"
       >
         <PlayIcon />

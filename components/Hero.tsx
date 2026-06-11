@@ -14,7 +14,7 @@ export default function Hero() {
       />
       <div className="absolute inset-0 bg-black/10" />
 
-      <div className="relative z-10 max-w-[1280px] mx-auto w-full flex flex-col md:flex-row px-6 md:px-16 pt-16 pb-12">
+      <div className="relative z-10 max-w-[1280px] mx-auto w-full flex flex-col md:flex-row px-6 md:px-16 pt-28 pb-12">
         <div className="flex-1 md:w-[55%] flex flex-col gap-6 justify-start">
           <p className="font-nunito text-white text-sm tracking-widest uppercase font-semibold">
             Just in case · Just in time · Just in touch

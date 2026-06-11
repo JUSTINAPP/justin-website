@@ -7,20 +7,23 @@ export default function Footer() {
         <Image
           src="/assets/justin-logo-no-background.png"
           alt="Justin"
-          width={240}
-          height={96}
-          className="h-24 w-auto object-contain mb-6"
+          width={360}
+          height={120}
+          className="h-[120px] w-auto object-contain"
         />
         <div className="flex items-center gap-6 text-white/40 text-sm">
-          <a href="#" className="hover:text-white/70 transition-colors">
+          <a href="/privacy" className="hover:text-white/70 transition-colors">
             Privacy Policy
           </a>
           <span>·</span>
-          <a href="#" className="hover:text-white/70 transition-colors">
+          <a href="/terms" className="hover:text-white/70 transition-colors">
             Terms
           </a>
           <span>·</span>
-          <a href="#" className="hover:text-white/70 transition-colors">
+          <a
+            href="mailto:hello@justinapp.com.au"
+            className="hover:text-white/70 transition-colors"
+          >
             Contact
           </a>
         </div>
