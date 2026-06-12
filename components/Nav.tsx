@@ -18,13 +18,13 @@ export default function Nav() {
         scrolled ? 'bg-white/95 shadow-sm' : 'bg-transparent'
       }`}
     >
-      <div className="flex flex-col items-center py-1.5 px-6">
+      <div className="flex flex-col items-center py-[3px] px-6">
         <Image
           src="/assets/justin-logo-no-background.png"
           alt="Justin"
-          width={260}
-          height={88}
-          className="h-[88px] w-auto object-contain"
+          width={340}
+          height={114}
+          className="h-[114px] w-auto object-contain"
         />
         <p
           className={`font-nunito text-sm tracking-wider transition-colors duration-300 ${
