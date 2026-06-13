@@ -11,6 +11,7 @@
 @theme inline {
   --font-nunito: var(--font-nunito);
   --font-inter: var(--font-inter);
+  --font-fraunces: var(--font-fraunces);
 }
 
 html {

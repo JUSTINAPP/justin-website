@@ -1,11 +1,18 @@
 import type { Metadata } from 'next';
-import { Nunito, Inter } from 'next/font/google';
+import { Nunito, Inter, Fraunces } from 'next/font/google';
 import './globals.css';
 
 const nunito = Nunito({
   weight: ['300', '400', '600', '700'],
   subsets: ['latin'],
   variable: '--font-nunito',
+  display: 'swap',
+});
+
+const fraunces = Fraunces({
+  weight: ['600'],
+  subsets: ['latin'],
+  variable: '--font-fraunces',
   display: 'swap',
 });
 
@@ -26,7 +33,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${nunito.variable} ${inter.variable}`}>
+    <html lang="en" className={`${nunito.variable} ${inter.variable} ${fraunces.variable}`}>
       <body>{children}</body>
     </html>
   );
