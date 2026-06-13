@@ -1,10 +1,11 @@
 const pills = [
-  "Open when you feel alone",
+  'Open on your birthday',
+  'Open on our anniversary',
+  'Open on your first day',
+  'Open when you miss me',
   "Open when you can't sleep",
-  "Open when your brain says nobody cares",
-  "Open when you feel overwhelmed",
-  "Open when you need grounding",
-  "Open when you want to give up",
+  "Open when it's a hard day",
+  'Open when you need me',
 ];
 
 export default function OpenWhen() {
@@ -16,10 +17,10 @@ export default function OpenWhen() {
       className="py-12 px-6"
     >
       <div className="max-w-4xl mx-auto text-center">
-        <h2 className="font-nunito font-bold text-5xl text-white mb-3">Open when…</h2>
-        <p className="text-white/80 text-lg mb-10">
-          You don&apos;t need to explain yourself. Just choose what you&apos;re feeling.
-        </p>
+        <h2 className="font-nunito font-bold text-5xl text-white mb-3">
+          For every moment that matters
+        </h2>
+        <p className="text-white/80 text-lg mb-10">Big days and hard days alike.</p>
         <div className="flex flex-wrap justify-center gap-3">
           {pills.map((pill) => (
             <span

@@ -17,11 +17,11 @@ export default function Hero() {
       <div className="relative z-10 max-w-[1280px] mx-auto w-full flex flex-col md:flex-row px-6 md:px-16 pt-36 pb-12">
         <div className="flex-1 md:w-[55%] flex flex-col gap-6 justify-start">
           <h1 className="font-nunito font-bold text-3xl md:text-5xl text-white leading-tight">
-            Your people. Saved for when you need them.
+            Leave the people you love something to open later.
           </h1>
           <p className="text-white/80 text-lg max-w-lg">
-            Justin gives the people who love you a private place to leave messages, voice
-            notes and photos — ready for the moment you need them most.
+            Record a message — your voice, a few photos — and choose when it opens. On a
+            birthday. An anniversary. Or simply when they need it most.
           </p>
           <AppStoreButtons />
         </div>

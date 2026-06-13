@@ -1,21 +1,21 @@
 const steps = [
   {
     number: '1',
-    title: 'Invite your people',
+    title: 'Record a moment',
     description:
-      'Choose up to 5 people who care about you. They receive a simple link — no app to download.',
+      'A short voice message and a few photos. Takes a minute. No pressure to be perfect.',
   },
   {
     number: '2',
-    title: 'They leave messages',
+    title: 'Choose when it opens',
     description:
-      "Voice notes, photos, short videos. Prompted with: 'What would you want them to hear when they feel alone?'",
+      "Set it for a date that matters — or let them open it whenever they need it, like 'open when you miss me'.",
   },
   {
     number: '3',
-    title: 'Open when you need them',
+    title: "They'll feel you there",
     description:
-      "When you're struggling, open Justin. Your people are waiting — and they'll be quietly notified to reach out.",
+      "Your message arrives exactly when it should. And when they open it, you'll quietly know — so you can reach out.",
   },
 ];
 
@@ -27,10 +27,10 @@ export default function HowItWorks() {
           How it works
         </p>
         <h2 className="font-nunito font-bold text-4xl text-brand-deep mb-3">
-          Simple to set up. Powerful when it matters.
+          Simple. Thoughtful. Exactly on time.
         </h2>
         <p className="text-gray-500 text-lg mb-8">
-          Three steps. No app for your supporters to download.
+          Three steps. No app for your recipient to download.
         </p>
 
         {/* Mobile carousel / Desktop grid */}

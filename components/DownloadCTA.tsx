@@ -11,10 +11,10 @@ export default function DownloadCTA() {
     >
       <div className="max-w-3xl mx-auto">
         <h2 className="font-nunito font-bold text-5xl text-white mb-3">
-          Give someone you love a place to come back to.
+          Start with one message.
         </h2>
         <p className="text-white/80 text-xl mb-10">
-          Free to download. Set up in minutes.
+          Pick one person. Leave them something for later. It only takes a minute.
         </p>
         <AppStoreButtons centered />
       </div>

@@ -3,9 +3,10 @@
 import { useEffect } from 'react';
 import Nav from '@/components/Nav';
 import Hero from '@/components/Hero';
-import Problem from '@/components/Problem';
+import ValueProp from '@/components/ValueProp';
 import HowItWorks from '@/components/HowItWorks';
 import OpenWhen from '@/components/OpenWhen';
+import ReachBack from '@/components/ReachBack';
 import Testimonials from '@/components/Testimonials';
 import DownloadCTA from '@/components/DownloadCTA';
 import Footer from '@/components/Footer';
@@ -36,13 +37,16 @@ export default function Home() {
         <Hero />
       </div>
       <div className="fade-in">
-        <Problem />
+        <ValueProp />
       </div>
       <div className="fade-in">
         <HowItWorks />
       </div>
       <div className="fade-in">
         <OpenWhen />
+      </div>
+      <div className="fade-in">
+        <ReachBack />
       </div>
       <div className="fade-in">
         <Testimonials />

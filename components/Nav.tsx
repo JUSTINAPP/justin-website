@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
+import Logo from './Logo';
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -19,13 +19,7 @@ export default function Nav() {
       }`}
     >
       <div className="flex flex-col items-center py-[3px] px-6">
-        <Image
-          src="/assets/justin-logo-no-background.png"
-          alt="Justin"
-          width={340}
-          height={114}
-          className="h-[114px] w-auto object-contain"
-        />
+        <Logo variant="full" size={56} />
         <p
           className={`font-nunito text-sm tracking-wider transition-colors duration-300 ${
             scrolled ? 'text-brand-purple/70' : 'text-white/85'

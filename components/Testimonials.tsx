@@ -1,20 +1,20 @@
 const testimonials = [
   {
     quote:
-      "I think Justin is a great support tool for psychotherapy as peer support has proven to be an effective intervention for people with substance and mental health issues.",
-    name: 'Dr Casimir Liber',
-    title: 'Psychiatrist',
+      "I have so much faith that this app is so invaluable to so many people — and as it is for me.",
+    name: 'Justine',
+    title: 'Using Justin for over a year',
+  },
+  {
+    quote: "The thing I like about Justin is I am in control — I choose what I leave and when.",
+    name: 'Stella',
+    title: '17 years old',
   },
   {
     quote:
-      "I have so much faith that this app is so invaluable to so many people and as it is for me.",
-    name: 'Justine',
-    title: 'Cancer patient',
-  },
-  {
-    quote: "The thing I like about Justin is I am in control of my conversations.",
-    name: 'Stella',
-    title: '17 years old',
+      "It's such a simple idea. Leave something for someone before you need to. I wish I'd had it years ago.",
+    name: 'Michael',
+    title: 'Father of two',
   },
 ];
 
@@ -26,7 +26,7 @@ export default function Testimonials() {
           What people say
         </p>
         <h2 className="font-nunito font-bold text-4xl text-brand-deep mb-8">
-          Heard from people who&apos;ve used it
+          Loved by the people who use it
         </h2>
 
         {/* Mobile carousel / Desktop grid */}
