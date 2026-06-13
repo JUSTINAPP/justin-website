@@ -2,51 +2,65 @@ const steps = [
   {
     number: '1',
     title: 'Record a moment',
-    description:
-      'A short voice message and a few photos. Takes a minute. No pressure to be perfect.',
+    description: 'Your voice and a few photos. Takes a minute. No pressure to be perfect.',
   },
   {
     number: '2',
     title: 'Choose when it opens',
-    description:
-      "Set it for a date that matters — or let them open it whenever they need it, like 'open when you miss me'.",
+    description: "A date that matters — or a feeling, like 'open when you miss me'.",
   },
   {
     number: '3',
-    title: "They'll feel you there",
-    description:
-      "Your message arrives exactly when it should. And when they open it, you'll quietly know — so you can reach out.",
+    title: 'They feel you there',
+    description: "It opens right on time. And when they do, you'll quietly know.",
   },
 ];
 
 export default function HowItWorks() {
   return (
-    <section className="bg-brand-light py-12 px-6">
-      <div className="max-w-5xl mx-auto">
-        <p className="text-brand-purple uppercase tracking-widest text-sm mb-3 font-nunito font-semibold">
-          How it works
-        </p>
-        <h2 className="font-nunito font-bold text-4xl text-brand-deep mb-3">
-          Simple. Thoughtful. Exactly on time.
-        </h2>
-        <p className="text-gray-500 text-lg mb-8">
-          Three steps. No app for your recipient to download.
-        </p>
+    <section id="how" className="py-16 md:py-20" style={{ background: 'white' }}>
+      <div className="wrap">
+        <div className="text-center" style={{ marginBottom: 48 }}>
+          <h2 style={{ fontSize: 38, fontWeight: 800, letterSpacing: '-1px', color: '#2e2540', margin: '0 0 10px' }}>
+            How it works
+          </h2>
+          <p style={{ fontSize: 17, color: '#8a8195', margin: 0 }}>
+            Three steps. No app for them to download.
+          </p>
+        </div>
 
-        {/* Mobile carousel / Desktop grid */}
-        <div className="scrollbar-hide -mx-6 flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 md:mx-0 md:grid md:grid-cols-3 md:gap-8 md:overflow-visible md:snap-none">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {steps.map((step) => (
             <div
               key={step.number}
-              className="snap-center shrink-0 min-w-[80vw] first:ml-6 last:mr-6 md:min-w-0 md:first:ml-0 md:last:mr-0 bg-white rounded-2xl p-8 border border-purple-100"
+              style={{
+                background: '#faf8fc',
+                border: '1px solid #f0eaf6',
+                borderRadius: 20,
+                padding: '32px 26px',
+              }}
             >
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-brand-purple to-brand-rose flex items-center justify-center font-nunito font-bold text-white mb-4">
+              <div
+                style={{
+                  width: 46,
+                  height: 46,
+                  borderRadius: 14,
+                  background: 'linear-gradient(135deg,#7B6BA8,#C4849A)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontWeight: 700,
+                  fontSize: 18,
+                  color: 'white',
+                  marginBottom: 18,
+                }}
+              >
                 {step.number}
               </div>
-              <h3 className="font-nunito font-bold text-xl text-brand-deep mb-2">
+              <h3 style={{ fontSize: 19, fontWeight: 700, color: '#2e2540', margin: '0 0 8px' }}>
                 {step.title}
               </h3>
-              <p className="text-gray-600 text-base leading-relaxed">
+              <p style={{ fontSize: 14, color: '#8a8195', lineHeight: 1.65, margin: 0 }}>
                 {step.description}
               </p>
             </div>

@@ -1,22 +1,29 @@
-import AppStoreButtons from './AppStoreButtons';
-
 export default function DownloadCTA() {
   return (
-    <section
-      id="download"
-      style={{
-        background: 'linear-gradient(160deg, #7B6BA8 0%, #C4849A 55%, #E8B48A 100%)',
-      }}
-      className="py-12 px-6 text-center"
-    >
-      <div className="max-w-3xl mx-auto">
-        <h2 className="font-nunito font-bold text-5xl text-white mb-3">
+    <section id="download" style={{ background: 'white' }} className="py-20 md:py-24">
+      <div className="wrap text-center">
+        <h2
+          style={{
+            fontSize: 42,
+            fontWeight: 800,
+            letterSpacing: '-1.2px',
+            color: '#2e2540',
+            margin: '0 0 14px',
+          }}
+        >
           Start with one message.
         </h2>
-        <p className="text-white/80 text-xl mb-10">
+        <p style={{ fontSize: 17, color: '#8a8195', margin: '0 0 36px' }}>
           Pick one person. Leave them something for later. It only takes a minute.
         </p>
-        <AppStoreButtons centered />
+        <a
+          href="https://apps.apple.com/au/app/justin/id1597447761"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-primary"
+        >
+          Download the app
+        </a>
       </div>
     </section>
   );

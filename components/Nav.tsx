@@ -1,32 +1,49 @@
-'use client';
-
-import { useEffect, useState } from 'react';
-import Logo from './Logo';
-
 export default function Nav() {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/95 shadow-sm' : 'bg-transparent'
-      }`}
+      style={{
+        position: 'sticky',
+        top: 0,
+        zIndex: 50,
+        background: 'rgba(255,255,255,0.85)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
+        borderBottom: '1px solid #f2eef7',
+      }}
     >
-      <div className="flex flex-col items-center py-[3px] px-6">
-        <Logo variant="full" size={56} />
-        <p
-          className={`font-nunito text-sm tracking-wider transition-colors duration-300 ${
-            scrolled ? 'text-brand-purple/70' : 'text-white/85'
-          }`}
-        >
-          Just in case, Just in time, Just in touch.
-        </p>
+      <div className="wrap flex items-center justify-between py-3.5">
+        {/* Wordmark */}
+        <a href="/" style={{ fontWeight: 800, fontSize: 26, letterSpacing: '-0.5px', textDecoration: 'none', lineHeight: 1 }}>
+          <span style={{ color: '#4A3B6B' }}>just</span>
+          <span style={{ color: '#C4849A' }}>in</span>
+        </a>
+
+        {/* Right side */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+          <a
+            href="#how"
+            className="hidden md:block"
+            style={{ fontSize: 14, fontWeight: 500, color: '#7B6BA8', textDecoration: 'none' }}
+          >
+            How it works
+          </a>
+          <a
+            href="https://apps.apple.com/au/app/justin/id1597447761"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              background: '#4A3B6B',
+              color: 'white',
+              padding: '9px 18px',
+              borderRadius: 9,
+              fontWeight: 600,
+              fontSize: 14,
+              textDecoration: 'none',
+            }}
+          >
+            Download
+          </a>
+        </div>
       </div>
     </nav>
   );

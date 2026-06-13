@@ -1,9 +1,7 @@
 const pills = [
   'Open on your birthday',
   'Open on our anniversary',
-  'Open on your first day',
   'Open when you miss me',
-  "Open when you can't sleep",
   "Open when it's a hard day",
   'Open when you need me',
 ];
@@ -11,21 +9,45 @@ const pills = [
 export default function OpenWhen() {
   return (
     <section
-      style={{
-        background: 'linear-gradient(160deg, #7B6BA8 0%, #C4849A 55%, #E8B48A 100%)',
-      }}
-      className="py-12 px-6"
+      style={{ background: 'linear-gradient(160deg,#7B6BA8,#C4849A 60%,#E8B48A)' }}
+      className="py-16 md:py-20"
     >
-      <div className="max-w-4xl mx-auto text-center">
-        <h2 className="font-nunito font-bold text-5xl text-white mb-3">
+      <div className="wrap text-center">
+        <h2
+          style={{
+            fontSize: 38,
+            fontWeight: 800,
+            color: 'white',
+            letterSpacing: '-1px',
+            margin: '0 0 10px',
+          }}
+        >
           For every moment that matters
         </h2>
-        <p className="text-white/80 text-lg mb-10">Big days and hard days alike.</p>
-        <div className="flex flex-wrap justify-center gap-3">
+        <p style={{ fontSize: 17, color: 'rgba(255,255,255,0.85)', margin: '0 0 36px' }}>
+          Big days and hard days alike.
+        </p>
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            gap: 10,
+            maxWidth: 680,
+            margin: '0 auto',
+          }}
+        >
           {pills.map((pill) => (
             <span
               key={pill}
-              className="bg-white/20 border border-white/40 text-white rounded-full px-6 py-3 text-base"
+              style={{
+                background: 'white',
+                color: '#7B6BA8',
+                padding: '12px 22px',
+                borderRadius: 10,
+                fontWeight: 600,
+                fontSize: 14,
+              }}
             >
               {pill}
             </span>
