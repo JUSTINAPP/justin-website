@@ -1,4 +1,11 @@
-const STROKE = { stroke: '#7B6BA8', strokeWidth: 1.6, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, fill: 'none' };
+// Icons reversed out to white for dark cards
+const STROKE = {
+  stroke: 'rgba(255,255,255,0.75)',
+  strokeWidth: 1.6,
+  strokeLinecap: 'round' as const,
+  strokeLinejoin: 'round' as const,
+  fill: 'none',
+};
 
 function MicIcon() {
   return (
@@ -58,7 +65,7 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section id="how" className="py-16 md:py-20" style={{ background: 'white' }}>
+    <section id="how" className="py-16 md:py-20" style={{ background: '#faf0e4' }}>
       <div className="wrap">
         <div className="text-center" style={{ marginBottom: 48 }}>
           <h2
@@ -79,10 +86,10 @@ export default function HowItWorks() {
             <div
               key={step.number}
               style={{
-                background: '#faf8fc',
-                border: '1px solid #f0eaf6',
+                background: '#2e2540',
                 borderRadius: 20,
                 padding: '32px 26px',
+                boxShadow: '0 8px 32px rgba(46,37,64,0.18)',
               }}
             >
               {/* Icon + badge row */}
@@ -106,10 +113,10 @@ export default function HowItWorks() {
                 </div>
                 {step.icon}
               </div>
-              <h3 style={{ fontSize: 19, fontWeight: 700, color: '#2e2540', margin: '0 0 8px' }}>
+              <h3 style={{ fontSize: 19, fontWeight: 700, color: 'white', margin: '0 0 8px' }}>
                 {step.title}
               </h3>
-              <p style={{ fontSize: 14, color: '#8a8195', lineHeight: 1.65, margin: 0 }}>
+              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', lineHeight: 1.65, margin: 0 }}>
                 {step.description}
               </p>
             </div>
