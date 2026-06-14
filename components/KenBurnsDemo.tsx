@@ -1,20 +1,20 @@
 /*
-  Ken Burns Demo — filmic, 50s seamless loop.
+  Ken Burns Demo — filmic, 32.5s seamless loop.
 
-  Timing: CYCLE=50s, STAGGER=10s, ACTIVE=12.5s.
-  - Fade-in:  2.5s  (0–5%  of cycle)
-  - Hold:     7.5s  (5–20% of cycle)
-  - Fade-out: 2.5s  (20–25% of cycle)  ← overlaps with next photo fading in
-  - Crossfade = ACTIVE − STAGGER = 2.5s  ← two photos coexist for 2.5s
-  - KB motion: 12.5s per photo = CYCLE/4, so it resets in perfect sync every loop.
+  Timing: CYCLE=32.5s, STAGGER=6.5s, ACTIVE=8.1s.
+  - Fade-in:  ~1.6s  (0–5%  of cycle)
+  - Hold:     ~4.9s  (5–20% of cycle)
+  - Fade-out: ~1.6s  (20–25% of cycle)  ← overlaps with next photo fading in
+  - Crossfade ≈ 1.6s  ← two photos coexist briefly
+  - KB motion: 16.25s = CYCLE/2 (integer multiple → resets in perfect sync).
+    Zoom runs at same gentle pace; photo exits at ~49% of the arc.
 
-  Captions appear on photos 1, 3, 5 (delays 0, 20, 40s) — every other photo
-  breathes quietly with no text.
+  Captions appear on photos 1, 3, 5 (delays 0, 13, 26s).
 */
 
-const CYCLE   = 50;   // full loop, seconds
-const STAGGER = 10;   // photo N+1 starts 10s after photo N
-const KB_DUR  = 12.5; // KB motion duration = ACTIVE window = CYCLE/4
+const CYCLE   = 32.5;  // full loop, seconds
+const STAGGER = 6.5;   // photo N+1 starts 6.5s after photo N
+const KB_DUR  = 16.25; // KB motion duration = CYCLE/2 (gentle zoom, syncs cleanly)
 
 const photos = [
   { src: '/assets/cooper-06.jpg', kb: 'kb-c1' },
@@ -24,11 +24,11 @@ const photos = [
   { src: '/assets/cooper-07.jpg', kb: 'kb-c5' },
 ];
 
-// Captions on photos 1, 3, 5 — delays match photo delays (0, 20, 40s)
+// Captions on photos 1, 3, 5 — delays match photo delays at new stagger (0, 13, 26s)
 const captions = [
   { text: 'Happy birthday, Coop.', delay: 0,  size: 22, weight: 600 },
-  { text: "I'm so proud of the\nperson you're becoming.", delay: 20, size: 17, weight: 400 },
-  { text: "Whatever today brings —\nI'm always right here.", delay: 40, size: 17, weight: 400 },
+  { text: "I'm so proud of the\nperson you're becoming.", delay: 13, size: 17, weight: 400 },
+  { text: "Whatever today brings —\nI'm always right here.", delay: 26, size: 17, weight: 400 },
 ];
 
 const bars = [
