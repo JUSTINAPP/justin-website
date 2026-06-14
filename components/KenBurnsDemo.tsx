@@ -17,11 +17,11 @@ const STAGGER = 10;   // photo N+1 starts 10s after photo N
 const KB_DUR  = 12.5; // KB motion duration = ACTIVE window = CYCLE/4
 
 const photos = [
-  { src: '/assets/cooper-01.jpg', kb: 'kb-c1' },
-  { src: '/assets/cooper-02.jpg', kb: 'kb-c2' },
-  { src: '/assets/cooper-03.jpg', kb: 'kb-c3' },
-  { src: '/assets/cooper-04.jpg', kb: 'kb-c4' },
-  { src: '/assets/cooper-05.jpg', kb: 'kb-c5' },
+  { src: '/assets/cooper-06.jpg', kb: 'kb-c1' },
+  { src: '/assets/cooper-03.jpg', kb: 'kb-c2' },
+  { src: '/assets/cooper-04.jpg', kb: 'kb-c3' },
+  { src: '/assets/cooper-05.jpg', kb: 'kb-c4' },
+  { src: '/assets/cooper-07.jpg', kb: 'kb-c5' },
 ];
 
 // Captions on photos 1, 3, 5 — delays match photo delays (0, 20, 40s)
