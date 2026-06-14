@@ -1,7 +1,17 @@
+import Image from 'next/image';
+
 export default function DownloadCTA() {
   return (
     <section id="download" style={{ background: 'white' }} className="py-20 md:py-24">
       <div className="wrap text-center">
+        {/* Illustration — dark ink on white */}
+        <Image
+          src="/assets/justin-hands-with-star-illustration.png"
+          alt=""
+          width={1000}
+          height={1000}
+          style={{ width: 80, height: 'auto', margin: '0 auto 28px' }}
+        />
         <h2
           style={{
             fontSize: 42,

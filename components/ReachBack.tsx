@@ -1,7 +1,17 @@
+import Image from 'next/image';
+
 export default function ReachBack() {
   return (
     <section style={{ background: '#2e2540' }} className="py-16 md:py-24">
       <div className="wrap text-center">
+        {/* Illustration — white ink on dark */}
+        <Image
+          src="/assets/justin-huging-arms-illustration-white.png"
+          alt=""
+          width={1000}
+          height={1000}
+          style={{ width: 110, height: 'auto', margin: '0 auto 28px' }}
+        />
         <p
           style={{
             fontSize: 12,

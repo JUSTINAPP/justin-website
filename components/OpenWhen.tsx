@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 const pills = [
   'Open on your birthday',
   'Open on our anniversary',
@@ -15,6 +17,14 @@ export default function OpenWhen() {
       className="py-16 md:py-20"
     >
       <div className="wrap text-center">
+        {/* Illustration — white ink on gradient */}
+        <Image
+          src="/assets/justin-waving-hand-illustration-white.png"
+          alt=""
+          width={1000}
+          height={1000}
+          style={{ width: 90, height: 'auto', margin: '0 auto 20px' }}
+        />
         <h2
           style={{
             fontSize: 38,

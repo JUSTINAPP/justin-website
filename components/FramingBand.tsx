@@ -1,8 +1,18 @@
+import Image from 'next/image';
+
 export default function FramingBand() {
   return (
     <section style={{ background: 'white' }} className="py-14 md:py-16">
       <div className="wrap text-center">
         <div style={{ maxWidth: 660, margin: '0 auto' }}>
+          {/* Illustration — dark ink on white */}
+          <Image
+            src="/assets/justin-hand-with-flower-illustration.png"
+            alt=""
+            width={1000}
+            height={1000}
+            style={{ width: 90, height: 'auto', margin: '0 auto 22px' }}
+          />
           <p
             style={{
               fontSize: 12,

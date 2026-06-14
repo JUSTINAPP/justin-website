@@ -1,8 +1,18 @@
+import Image from 'next/image';
+
 export default function WhyJustin() {
   return (
-    <section style={{ background: '#faf8fc' }} className="py-16 md:py-20">
+    <section style={{ background: '#faf0e4' }} className="py-16 md:py-20">
       <div className="wrap">
         <div style={{ maxWidth: 640, margin: '0 auto', textAlign: 'center' }}>
+          {/* Illustration — dark ink on cream */}
+          <Image
+            src="/assets/justin-hands-around-face-illustration.png"
+            alt=""
+            width={1000}
+            height={1000}
+            style={{ width: 140, height: 'auto', margin: '0 auto 28px' }}
+          />
           <h2
             style={{
               fontSize: 'clamp(26px, 3.5vw, 32px)',
