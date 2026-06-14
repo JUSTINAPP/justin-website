@@ -13,7 +13,7 @@ const pills = [
 export default function OpenWhen() {
   return (
     <section
-      style={{ background: 'linear-gradient(160deg,#7B6BA8,#C4849A 60%,#E8B48A)' }}
+      style={{ background: 'linear-gradient(160deg,#7B6BA8,#C4849A 60%,#E8B48A)', paddingTop: 40 }}
       className="py-16 md:py-20"
     >
       <div className="wrap text-center">
@@ -23,7 +23,7 @@ export default function OpenWhen() {
           alt=""
           width={1000}
           height={1000}
-          style={{ width: 90, height: 'auto', margin: '0 auto 20px' }}
+          style={{ width: 104, height: 'auto', margin: '0 auto 20px' }}
         />
         <h2
           style={{

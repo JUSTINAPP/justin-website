@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function DownloadCTA() {
   return (
-    <section id="download" style={{ background: 'white' }} className="py-20 md:py-24">
+    <section id="download" style={{ background: 'white', paddingTop: 67 }} className="py-20 md:py-24">
       <div className="wrap text-center">
         {/* Illustration — dark ink on white */}
         <Image
@@ -10,7 +10,7 @@ export default function DownloadCTA() {
           alt=""
           width={1000}
           height={1000}
-          style={{ width: 80, height: 'auto', margin: '0 auto 28px' }}
+          style={{ width: 104, height: 'auto', margin: '0 auto 28px' }}
         />
         <h2
           style={{

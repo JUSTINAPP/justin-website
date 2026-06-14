@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function WhyJustin() {
   return (
-    <section style={{ background: '#faf0e4' }} className="py-16 md:py-20">
+    <section style={{ background: '#faf0e4', paddingTop: 56 }} className="py-16 md:py-20">
       <div className="wrap">
         <div style={{ maxWidth: 640, margin: '0 auto', textAlign: 'center' }}>
           {/* Illustration — dark ink on cream */}
@@ -11,7 +11,7 @@ export default function WhyJustin() {
             alt=""
             width={1000}
             height={1000}
-            style={{ width: 140, height: 'auto', margin: '0 auto 28px' }}
+            style={{ width: 126, height: 'auto', margin: '0 auto 28px' }}
           />
           <h2
             style={{

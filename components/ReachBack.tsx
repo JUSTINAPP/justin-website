@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function ReachBack() {
   return (
-    <section style={{ background: '#2e2540' }} className="py-16 md:py-24">
+    <section style={{ background: '#2e2540', paddingTop: 67 }} className="py-16 md:py-24">
       <div className="wrap text-center">
         {/* Illustration — white ink on dark */}
         <Image
