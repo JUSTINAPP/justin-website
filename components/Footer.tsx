@@ -1,3 +1,5 @@
+import ShareButton from './ShareButton';
+
 export default function Footer() {
   return (
     <footer style={{ background: '#241c33' }} className="py-10">
@@ -26,6 +28,9 @@ export default function Footer() {
         <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: 12, fontStyle: 'italic', margin: 0 }}>
           Just in case. Just in time. Just in touch.
         </p>
+
+        {/* Share */}
+        <ShareButton />
       </div>
     </footer>
   );

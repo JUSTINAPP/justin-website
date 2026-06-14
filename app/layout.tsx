@@ -17,9 +17,29 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'Justin — Leave something to open later',
+  title: 'Justin — Give someone you love a gift of your voice',
   description:
-    'Record a message for someone you love — your voice, a few photos. They open it on a birthday, a hard day, or whenever they need you.',
+    'Record voice messages for the people who matter, and choose when they open — a birthday, a hard day, or whenever they need to hear you.',
+  metadataBase: new URL('https://www.justinapp.com.au'),
+  openGraph: {
+    type: 'website',
+    url: 'https://www.justinapp.com.au',
+    title: 'Justin — Give someone you love a gift of your voice',
+    description:
+      'Record voice messages for the people who matter, and choose when they open — a birthday, a hard day, or whenever they need to hear you.',
+    images: [{ url: '/assets/og-image.png', width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Justin — Give someone you love a gift of your voice',
+    description:
+      'Record voice messages for the people who matter, and choose when they open — a birthday, a hard day, or whenever they need to hear you.',
+    images: ['/assets/og-image.png'],
+  },
+  icons: {
+    icon: '/assets/justin-logo.png',
+    apple: '/assets/justin-logo.png',
+  },
 };
 
 export default function RootLayout({
