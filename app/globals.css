@@ -99,43 +99,60 @@ body {
   &::-webkit-scrollbar { display: none; }
 }
 
-/* ── Ken Burns demo animations (30s seamless loop, elegant) ── */
-
+/* ── Ken Burns demo animations (filmic, 50s seamless loop) ── */
 /*
-  Timing: CYCLE=30s, STAGGER=10s, ACTIVE=12s (2s fade-in, 8s hold, 2s fade-out).
-  Photos staggered at 0s / 10s / 20s. Cross-fades overlap: photo N fades out
-  while photo N+1 fades in, giving silky 2s dissolves. Loop is seamless because
-  CYCLE (30s) = 3 × STAGGER (10s).
+  5 photos. CYCLE=50s, STAGGER=10s, ACTIVE=12.5s.
+  kb-photo-fade handles opacity (50s); kb-cN handles motion (12.5s = CYCLE/4, so
+  the KB resets exactly in sync every loop). Crossfade = ACTIVE − STAGGER = 2.5s.
 */
+
+/* Opacity: each photo fades in over 2.5s, holds 7.5s, fades out 2.5s */
 @keyframes kb-photo-fade {
-  /*  0s */ 0%    { opacity: 0; }
-  /*  2s */ 6.67% { opacity: 1; }   /* fully in */
-  /* 10s */ 33.33% { opacity: 1; }  /* start fade-out (next photo begins fading in) */
-  /* 12s */ 40%   { opacity: 0; }   /* fully out */
-  /* 30s */ 100%  { opacity: 0; }
+  0%   { opacity: 0; }
+  5%   { opacity: 1; }   /* 2.5s in */
+  20%  { opacity: 1; }   /* hold to 10s, then next starts fading in */
+  25%  { opacity: 0; }   /* 2.5s out, complete at 12.5s */
+  100% { opacity: 0; }
 }
-/* KB motion: subliminal drift, scale 1.0→1.06 over full 30s, each photo unique direction */
-@keyframes kb-drift-1 {
-  0%   { transform: scale(1.0)  translate(0,      0); }
-  100% { transform: scale(1.06) translate(-1.2%, -0.9%); }
+
+/* KB motion keyframes — each 12.5s, unique character per photo */
+/* 1: slow push-in centered — steady, dignified */
+@keyframes kb-c1 {
+  0%   { transform: scale(1.0)  translate(0,      0);     }
+  100% { transform: scale(1.12) translate(0,      0);     }
 }
-@keyframes kb-drift-2 {
-  0%   { transform: scale(1.0)  translate(0,     0); }
-  100% { transform: scale(1.06) translate(1.1%,  0.8%); }
+/* 2: drift upper-left while zooming — tender, searching */
+@keyframes kb-c2 {
+  0%   { transform: scale(1.02) translate( 1.5%,  1.0%); }
+  100% { transform: scale(1.13) translate(-1.5%, -1.5%); }
 }
-@keyframes kb-drift-3 {
-  0%   { transform: scale(1.0)  translate(0,      0); }
-  100% { transform: scale(1.06) translate(-0.4%, -0.5%); }
+/* 3: pull back from close — breath, release, memory */
+@keyframes kb-c3 {
+  0%   { transform: scale(1.16) translate(-1.5%,  1.0%); }
+  100% { transform: scale(1.05) translate( 0.5%, -0.5%); }
 }
-/* Caption: gentle rise + fade, same 30s cycle */
+/* 4: push up and in — intimate, closing in */
+@keyframes kb-c4 {
+  0%   { transform: scale(1.01) translate( 0,     1.5%); }
+  100% { transform: scale(1.11) translate(-0.5%, -2.0%); }
+}
+/* 5: slide across with gentle push — world opening up */
+@keyframes kb-c5 {
+  0%   { transform: scale(1.08) translate(-2.0%,  0.2%); }
+  100% { transform: scale(1.12) translate( 1.5%,  0.8%); }
+}
+
+/* Captions: placed on photos 1, 3, 5 (delays 0, 20, 40s). 50s cycle.
+   Rise in 1.5s, hold, out 1.5s — total ~8.5s on screen. */
 @keyframes kb-caption {
-  /*  0s */ 0%    { opacity: 0; transform: translateY(7px); }
-  /*1.5s */ 5%    { opacity: 1; transform: translateY(0);   }
-  /* 8.5s */ 28%  { opacity: 1; transform: translateY(0);   }
-  /* 10s */ 33%   { opacity: 0; transform: translateY(-3px); }
-  /* 30s */ 100%  { opacity: 0; transform: translateY(-3px); }
+  0%   { opacity: 0; transform: translateY(8px);  }
+  3%   { opacity: 1; transform: translateY(0);    }  /* fully in at 1.5s */
+  14%  { opacity: 1; transform: translateY(0);    }  /* hold to 7s */
+  17%  { opacity: 0; transform: translateY(-4px); }  /* out by 8.5s */
+  100% { opacity: 0; transform: translateY(-4px); }
 }
-/* Waveform bars — subtle, asymmetric */
+
+/* Waveform bars */
 @keyframes bar-a { 0%, 100% { height: 3px; }  50% { height: 14px; } }
 @keyframes bar-b { 0%, 100% { height: 9px; }  50% { height: 4px;  } }
 @keyframes bar-c { 0%, 100% { height: 4px; }  50% { height: 18px; } }
