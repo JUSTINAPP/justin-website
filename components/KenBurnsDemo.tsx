@@ -28,7 +28,7 @@ const photos = [
 const captions = [
   { text: 'Happy birthday, Coop.', delay: 0,  size: 22, weight: 600 },
   { text: "I'm so proud of the\nperson you're becoming.", delay: 13, size: 17, weight: 400 },
-  { text: "Whatever today brings —\nI'm always right here.", delay: 26, size: 17, weight: 400 },
+  { text: "Whatever today brings,\nI'm always right here.", delay: 26, size: 17, weight: 400 },
 ];
 
 const bars = [

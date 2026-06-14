@@ -52,7 +52,7 @@ const steps = [
     icon: <CalendarIcon />,
     title: 'Choose when it opens',
     description:
-      "Right away, on a date that matters, or whenever they need it — like 'open when you miss me'.",
+      "Right away, on a date that matters, or whenever they need it. Like 'open when you miss me'.",
   },
   {
     number: '3',

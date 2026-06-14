@@ -27,7 +27,7 @@ export default function ComingSoonPage() {
       </h1>
       <p className="text-white/75 text-lg max-w-md mb-12">
         Justin is currently available on iPhone. We&apos;re working hard to bring it to
-        Android — check back soon.
+        Android. Check back soon.
       </p>
 
       <a

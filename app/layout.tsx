@@ -19,21 +19,21 @@ const plusJakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: 'Justin — Give someone you love a gift of your voice',
   description:
-    'Record voice messages for the people who matter, and choose when they open — a birthday, a hard day, or whenever they need to hear you.',
+    'Record voice messages for the people who matter, and choose when they open. A birthday, a hard day, or whenever they need to hear you.',
   metadataBase: new URL('https://www.justinapp.com.au'),
   openGraph: {
     type: 'website',
     url: 'https://www.justinapp.com.au',
     title: 'Justin — Give someone you love a gift of your voice',
     description:
-      'Record voice messages for the people who matter, and choose when they open — a birthday, a hard day, or whenever they need to hear you.',
+      'Record voice messages for the people who matter, and choose when they open. A birthday, a hard day, or whenever they need to hear you.',
     images: [{ url: '/assets/og-image.png', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Justin — Give someone you love a gift of your voice',
     description:
-      'Record voice messages for the people who matter, and choose when they open — a birthday, a hard day, or whenever they need to hear you.',
+      'Record voice messages for the people who matter, and choose when they open. A birthday, a hard day, or whenever they need to hear you.',
     images: ['/assets/og-image.png'],
   },
   icons: {

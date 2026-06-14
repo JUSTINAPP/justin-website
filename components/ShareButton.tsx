@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 const SHARE_DATA = {
   title: 'Justin',
-  text: "I found this — a way to leave the people you love a gift of your voice 💛",
+  text: "I found this: a way to leave the people you love a gift of your voice 💛",
   url: 'https://www.justinapp.com.au',
 };
 
