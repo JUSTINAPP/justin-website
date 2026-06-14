@@ -14,6 +14,7 @@
 
 @theme inline {
   --font-plus-jakarta: var(--font-plus-jakarta-sans);
+  --font-caveat: var(--font-caveat);
 }
 
 html {
@@ -96,3 +97,47 @@ body {
   -ms-overflow-style: none;
   &::-webkit-scrollbar { display: none; }
 }
+
+/* ── Ken Burns demo animations (30s seamless loop, elegant) ── */
+
+/*
+  Timing: CYCLE=30s, STAGGER=10s, ACTIVE=12s (2s fade-in, 8s hold, 2s fade-out).
+  Photos staggered at 0s / 10s / 20s. Cross-fades overlap: photo N fades out
+  while photo N+1 fades in, giving silky 2s dissolves. Loop is seamless because
+  CYCLE (30s) = 3 × STAGGER (10s).
+*/
+@keyframes kb-photo-fade {
+  /*  0s */ 0%    { opacity: 0; }
+  /*  2s */ 6.67% { opacity: 1; }   /* fully in */
+  /* 10s */ 33.33% { opacity: 1; }  /* start fade-out (next photo begins fading in) */
+  /* 12s */ 40%   { opacity: 0; }   /* fully out */
+  /* 30s */ 100%  { opacity: 0; }
+}
+/* KB motion: subliminal drift, scale 1.0→1.06 over full 30s, each photo unique direction */
+@keyframes kb-drift-1 {
+  0%   { transform: scale(1.0)  translate(0,      0); }
+  100% { transform: scale(1.06) translate(-1.2%, -0.9%); }
+}
+@keyframes kb-drift-2 {
+  0%   { transform: scale(1.0)  translate(0,     0); }
+  100% { transform: scale(1.06) translate(1.1%,  0.8%); }
+}
+@keyframes kb-drift-3 {
+  0%   { transform: scale(1.0)  translate(0,      0); }
+  100% { transform: scale(1.06) translate(-0.4%, -0.5%); }
+}
+/* Caption: gentle rise + fade, same 30s cycle */
+@keyframes kb-caption {
+  /*  0s */ 0%    { opacity: 0; transform: translateY(7px); }
+  /*1.5s */ 5%    { opacity: 1; transform: translateY(0);   }
+  /* 8.5s */ 28%  { opacity: 1; transform: translateY(0);   }
+  /* 10s */ 33%   { opacity: 0; transform: translateY(-3px); }
+  /* 30s */ 100%  { opacity: 0; transform: translateY(-3px); }
+}
+/* Waveform bars — subtle, asymmetric */
+@keyframes bar-a { 0%, 100% { height: 3px; }  50% { height: 14px; } }
+@keyframes bar-b { 0%, 100% { height: 9px; }  50% { height: 4px;  } }
+@keyframes bar-c { 0%, 100% { height: 4px; }  50% { height: 18px; } }
+@keyframes bar-d { 0%, 100% { height: 12px; } 50% { height: 3px;  } }
+@keyframes bar-e { 0%, 100% { height: 6px; }  50% { height: 15px; } }
+@keyframes bar-f { 0%, 100% { height: 10px; } 50% { height: 4px;  } }

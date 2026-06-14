@@ -1,3 +1,5 @@
+import KenBurnsDemo from './KenBurnsDemo';
+
 export default function Hero() {
   return (
     <section
@@ -16,7 +18,7 @@ export default function Hero() {
               fontWeight: 700,
             }}
           >
-            Just in case · time · touch
+            Just in case · Just in time · Just in touch
           </p>
 
           <h1
@@ -29,12 +31,12 @@ export default function Hero() {
               margin: 0,
             }}
           >
-            Something to open<br className="hidden md:block" /> when it matters most.
+            Give someone you love<br className="hidden md:block" /> a gift of your voice.
           </h1>
 
           <p style={{ fontSize: 17, color: '#7a7185', maxWidth: 420, lineHeight: 1.65, margin: 0 }}>
-            Record a message for someone you love — your voice, a few photos. They open it
-            on a birthday, a hard day, or whenever they need you.
+            Justin lets you record voice messages for the people who matter — and choose
+            when they open. On a birthday. A hard day. Or whenever they need to hear you.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 mt-1">
@@ -52,7 +54,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Right — CSS phone mockup */}
+        {/* Right — phone frame with Ken Burns demo */}
         <div className="flex-shrink-0 flex items-center justify-center">
           <div
             style={{
@@ -68,59 +70,11 @@ export default function Hero() {
               style={{
                 width: '100%',
                 height: '100%',
-                background: 'linear-gradient(170deg,#9b8ec4,#d4a0b0 58%,#e8b48a)',
                 borderRadius: 34,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: 22,
-                padding: '0 24px',
+                overflow: 'hidden',
               }}
             >
-              {/* Wordmark */}
-              <div style={{ fontWeight: 800, fontSize: 28, color: 'white', letterSpacing: '-0.5px' }}>
-                justin
-              </div>
-
-              {/* Play button */}
-              <div
-                style={{
-                  width: 88,
-                  height: 88,
-                  borderRadius: '50%',
-                  background: 'rgba(255,255,255,0.25)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <div
-                  style={{
-                    width: 0,
-                    height: 0,
-                    borderTop: '13px solid transparent',
-                    borderBottom: '13px solid transparent',
-                    borderLeft: '22px solid white',
-                    marginLeft: 5,
-                  }}
-                />
-              </div>
-
-              {/* Caption */}
-              <div
-                style={{
-                  textAlign: 'center',
-                  color: 'white',
-                  fontSize: 13,
-                  lineHeight: 1.55,
-                  opacity: 0.92,
-                }}
-              >
-                A message from Mum
-                <br />
-                opens on your birthday 🎂
-              </div>
+              <KenBurnsDemo />
             </div>
           </div>
         </div>

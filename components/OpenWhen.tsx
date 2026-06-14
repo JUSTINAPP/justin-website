@@ -1,7 +1,9 @@
 const pills = [
   'Open on your birthday',
   'Open on our anniversary',
+  'Open on your first day',
   'Open when you miss me',
+  "Open when you can't sleep",
   "Open when it's a hard day",
   'Open when you need me',
 ];
@@ -22,7 +24,7 @@ export default function OpenWhen() {
             margin: '0 0 10px',
           }}
         >
-          For every moment that matters
+          For every moment that matters.
         </h2>
         <p style={{ fontSize: 17, color: 'rgba(255,255,255,0.85)', margin: '0 0 36px' }}>
           Big days and hard days alike.

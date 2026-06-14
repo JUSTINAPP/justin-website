@@ -2,17 +2,19 @@ const steps = [
   {
     number: '1',
     title: 'Record a moment',
-    description: 'Your voice and a few photos. Takes a minute. No pressure to be perfect.',
+    description: 'Your voice, a few photos. Takes a minute. No pressure to be perfect.',
   },
   {
     number: '2',
     title: 'Choose when it opens',
-    description: "A date that matters — or a feeling, like 'open when you miss me'.",
+    description:
+      "Right away, on a date that matters, or whenever they need it — like 'open when you miss me'.",
   },
   {
     number: '3',
-    title: 'They feel you there',
-    description: "It opens right on time. And when they do, you'll quietly know.",
+    title: "They'll feel you there",
+    description:
+      "Your message arrives exactly when it should. And when they open it, you'll quietly know.",
   },
 ];
 
@@ -21,12 +23,17 @@ export default function HowItWorks() {
     <section id="how" className="py-16 md:py-20" style={{ background: 'white' }}>
       <div className="wrap">
         <div className="text-center" style={{ marginBottom: 48 }}>
-          <h2 style={{ fontSize: 38, fontWeight: 800, letterSpacing: '-1px', color: '#2e2540', margin: '0 0 10px' }}>
-            How it works
+          <h2
+            style={{
+              fontSize: 38,
+              fontWeight: 800,
+              letterSpacing: '-1px',
+              color: '#2e2540',
+              margin: '0 0 10px',
+            }}
+          >
+            A gift you build over time.
           </h2>
-          <p style={{ fontSize: 17, color: '#8a8195', margin: 0 }}>
-            Three steps. No app for them to download.
-          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">

@@ -37,7 +37,7 @@ export default function ReachBack() {
           }}
         >
           The moment someone opens your message, you get a gentle nudge — a quiet sign
-          that now might be the moment to call, to text, to show up. Care, exactly when
+          that now might be the time to call, to text, to show up. Care, exactly when
           it&apos;s needed.
         </p>
       </div>
