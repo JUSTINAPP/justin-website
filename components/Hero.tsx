@@ -35,7 +35,7 @@ export default function Hero() {
           </h1>
 
           <p style={{ fontSize: 17, color: '#7a7185', maxWidth: 420, lineHeight: 1.65, margin: 0 }}>
-            Justin lets you record voice messages for the people who matter — and choose
+            Justin lets you record voice messages for the people who matter, then choose
             when they open. On a birthday. A hard day. Or whenever they need to hear you.
           </p>
 

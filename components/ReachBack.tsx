@@ -46,7 +46,7 @@ export default function ReachBack() {
             lineHeight: 1.7,
           }}
         >
-          The moment someone opens your message, you get a gentle nudge — a quiet sign
+          The moment someone opens your message, you get a gentle nudge. A quiet sign
           that now might be the time to call, to text, to show up. Care, exactly when
           it&apos;s needed.
         </p>

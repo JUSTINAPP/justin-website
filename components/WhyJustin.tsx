@@ -33,7 +33,7 @@ export default function WhyJustin() {
               margin: 0,
             }}
           >
-            When life is hard, our minds tell us we&apos;re alone — that we&apos;d be a burden,
+            When life is hard, our minds tell us we&apos;re alone. That we&apos;d be a burden,
             that no one really cares. Justin is a quiet answer to that. A place to keep the
             voices of the people who love you, ready for the moment you forget they&apos;re
             there. Not a social network. Not another feed. Just the people who matter, saved
