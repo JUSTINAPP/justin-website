@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -8,33 +7,68 @@ export const metadata: Metadata = {
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section className="mb-10">
-      <h2 className="font-nunito font-bold text-2xl text-brand-deep mb-3">{title}</h2>
-      <div className="text-gray-600 leading-relaxed space-y-3">{children}</div>
+    <section style={{ marginBottom: 44 }}>
+      <h2
+        style={{
+          fontSize: 19,
+          fontWeight: 700,
+          color: '#4A3B6B',
+          letterSpacing: '-0.3px',
+          margin: '0 0 12px',
+        }}
+      >
+        {title}
+      </h2>
+      <div style={{ color: '#5a4f6b', lineHeight: 1.75, display: 'flex', flexDirection: 'column', gap: 12 }}>
+        {children}
+      </div>
     </section>
   );
 }
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-brand-light">
-      <header className="bg-brand-deep px-6 py-4">
-        <div className="max-w-4xl mx-auto">
-          <Link href="/">
-            <Image
-              src="/assets/justin-logo-no-background.png"
-              alt="Justin — Home"
-              width={160}
-              height={56}
-              className="h-14 w-auto object-contain"
-            />
-          </Link>
+    <div style={{ minHeight: '100vh', background: 'white' }}>
+
+      {/* ── Header — matches Nav ── */}
+      <header
+        style={{
+          position: 'sticky',
+          top: 0,
+          zIndex: 50,
+          background: 'rgba(255,255,255,0.92)',
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
+          borderBottom: '1px solid #f2eef7',
+        }}
+      >
+        <div className="wrap flex items-center justify-between py-3.5">
+          <a
+            href="/"
+            style={{ fontWeight: 800, fontSize: 26, letterSpacing: '-0.5px', textDecoration: 'none', lineHeight: 1 }}
+          >
+            <span style={{ color: '#4A3B6B' }}>just</span>
+            <span style={{ color: '#C4849A' }}>in</span>
+          </a>
+          <span style={{ fontSize: 14, fontWeight: 500, color: '#8a8195' }}>Privacy Policy</span>
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto px-6 py-14">
-        <h1 className="font-nunito font-bold text-4xl text-brand-deep mb-2">Privacy Policy</h1>
-        <p className="text-gray-400 text-sm mb-12">Last updated: June 2025</p>
+      {/* ── Content ── */}
+      <main style={{ maxWidth: 720, margin: '0 auto', padding: '56px 32px 96px' }}>
+        <h1
+          style={{
+            fontSize: 'clamp(28px, 4vw, 38px)',
+            fontWeight: 800,
+            letterSpacing: '-0.8px',
+            color: '#2e2540',
+            margin: '0 0 8px',
+            lineHeight: 1.1,
+          }}
+        >
+          Privacy Policy
+        </h1>
+        <p style={{ fontSize: 14, color: '#8a8195', margin: '0 0 52px' }}>Last updated: June 2025</p>
 
         <Section title="1. Introduction">
           <p>
@@ -58,29 +92,29 @@ export default function PrivacyPage() {
         <Section title="2. Information We Collect">
           <p>We collect the following categories of information:</p>
           <p>
-            <strong className="text-brand-deep">Account information:</strong> When you register,
+            <strong style={{ color: '#4A3B6B' }}>Account information:</strong> When you register,
             we collect your name, email address, and date of birth. This is used to create and
             manage your account.
           </p>
           <p>
-            <strong className="text-brand-deep">Support network information:</strong> To invite
+            <strong style={{ color: '#4A3B6B' }}>Support network information:</strong> To invite
             people to your support network, you provide their name and contact details (email or
             phone number). These individuals do not need to create an account. We use this
             information solely to deliver your invitation.
           </p>
           <p>
-            <strong className="text-brand-deep">User-generated content:</strong> Voice notes,
+            <strong style={{ color: '#4A3B6B' }}>User-generated content:</strong> Voice notes,
             photographs, short videos, and text messages uploaded by your support network members
             on your behalf are stored on our servers and associated with your account.
           </p>
           <p>
-            <strong className="text-brand-deep">Usage data:</strong> We may collect anonymised
+            <strong style={{ color: '#4A3B6B' }}>Usage data:</strong> We may collect anonymised
             information about how you interact with the Service (e.g., which features you use,
             session duration) to improve the app. This data cannot be used to identify you
             individually.
           </p>
           <p>
-            <strong className="text-brand-deep">Device information:</strong> We collect your
+            <strong style={{ color: '#4A3B6B' }}>Device information:</strong> We collect your
             device type, operating system version, and push notification token to deliver
             notifications and ensure compatibility.
           </p>
@@ -231,7 +265,7 @@ export default function PrivacyPage() {
             privacy practices, please contact us:
           </p>
           <p>
-            <strong className="text-brand-deep">Justin App Pty Ltd</strong>
+            <strong style={{ color: '#2e2540' }}>Justin App Pty Ltd</strong>
             <br />
             Email:{' '}
             <a href="mailto:hello@justinapp.com.au" className="text-brand-purple hover:underline">
@@ -247,14 +281,31 @@ export default function PrivacyPage() {
         </Section>
       </main>
 
-      <footer className="bg-brand-deep py-8 px-6 text-center">
-        <p className="text-white/30 text-sm">© 2025 Justin App. All rights reserved.</p>
-        <div className="flex justify-center gap-6 mt-2 text-white/40 text-sm">
-          <Link href="/privacy" className="hover:text-white/70 transition-colors">Privacy Policy</Link>
-          <span>·</span>
-          <Link href="/terms" className="hover:text-white/70 transition-colors">Terms</Link>
-          <span>·</span>
-          <a href="mailto:hello@justinapp.com.au" className="hover:text-white/70 transition-colors">Contact</a>
+      {/* ── Footer — matches main site Footer ── */}
+      <footer style={{ background: '#241c33' }} className="py-10">
+        <div
+          className="wrap"
+          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, textAlign: 'center' }}
+        >
+          <a
+            href="/"
+            style={{ fontWeight: 800, fontSize: 22, letterSpacing: '-0.5px', lineHeight: 1, textDecoration: 'none' }}
+          >
+            <span style={{ color: 'white' }}>just</span>
+            <span style={{ color: '#C4849A' }}>in</span>
+          </a>
+          <div style={{ display: 'flex', gap: 16, alignItems: 'center', color: 'rgba(255,255,255,0.45)', fontSize: 13 }}>
+            <Link href="/privacy" style={{ color: 'inherit', textDecoration: 'none' }}>Privacy</Link>
+            <span>·</span>
+            <Link href="/terms" style={{ color: 'inherit', textDecoration: 'none' }}>Terms</Link>
+            <span>·</span>
+            <a href="mailto:hello@justinapp.com.au" style={{ color: 'inherit', textDecoration: 'none' }}>
+              hello@justinapp.com.au
+            </a>
+          </div>
+          <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: 12, fontStyle: 'italic', margin: 0 }}>
+            Just in case. Just in time. Just in touch.
+          </p>
         </div>
       </footer>
     </div>
