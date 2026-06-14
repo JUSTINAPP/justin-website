@@ -39,7 +39,7 @@ export default function Hero() {
             when they open. On a birthday. A hard day. Or whenever they need to hear you.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 mt-1">
+          <div className="mt-2">
             <a
               href="https://apps.apple.com/au/app/justin/id1597447761"
               target="_blank"
@@ -47,9 +47,6 @@ export default function Hero() {
               className="btn-primary"
             >
               Download the app
-            </a>
-            <a href="/record" className="btn-ghost">
-              Leave a message now
             </a>
           </div>
         </div>
