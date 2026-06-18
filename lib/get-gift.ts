@@ -10,8 +10,7 @@ export type GiftMessage = {
 export type GiftData = {
   id: string;
   senderName: string;
-  senderAvatarUrl: string | null;
-  senderAvatarColor: string | null;
+  moreGiftsCount: number;
   messages: GiftMessage[];
 };
 
@@ -24,30 +23,22 @@ export async function getGiftByToken(token: string): Promise<GiftData | null> {
     console.error('[getGiftByToken] MISSING env vars — SUPABASE_URL:', !!process.env.SUPABASE_URL, 'SUPABASE_SERVICE_ROLE_KEY:', !!process.env.SUPABASE_SERVICE_ROLE_KEY);
     return null;
   }
-  console.error('[getGiftByToken] env vars present, creating admin client');
 
   const supabase = createAdminClient();
 
-  // ── Query 1: gift row + author (people join) ─────────────────────────────
-  // Use people!author_id(...) to disambiguate: gifts has two FKs to people
-  // (author_id and recipient_id) and PostgREST requires an explicit hint.
-  const giftSelect = 'id, author_id, people!author_id(display_name, avatar_url, avatar_color)';
-  console.error('[getGiftByToken] gifts query select:', giftSelect);
-  console.error('[getGiftByToken] gifts query share_token =', token);
-
+  // ── Query 1: gift row + author name ─────────────────────────────────────
+  // people!author_id disambiguates: gifts has two FKs to people (author_id + recipient_id)
   const { data: gift, error: giftError } = await supabase
     .from('gifts')
-    .select(giftSelect)
+    .select('id, author_id, recipient_id, people!author_id(display_name)')
     .eq('share_token', token)
     .single();
 
-  console.error('[getGiftByToken] gifts query error (raw):', giftError);
-  console.error('[getGiftByToken] gifts query error (JSON):', JSON.stringify(giftError));
   if (giftError) {
-    console.error('[getGiftByToken] gifts error — message:', giftError.message, '| code:', giftError.code, '| details:', giftError.details, '| hint:', giftError.hint);
+    console.error('[getGiftByToken] gifts error — message:', giftError.message, '| code:', giftError.code, '| details:', giftError.details);
   }
   console.error('[getGiftByToken] gifts query data:', gift
-    ? { id: gift.id, author_id: gift.author_id, people: gift.people }
+    ? { id: gift.id, author_id: gift.author_id, recipient_id: gift.recipient_id, people: gift.people }
     : null
   );
 
@@ -64,14 +55,27 @@ export async function getGiftByToken(token: string): Promise<GiftData | null> {
     .eq('gift_id', gift.id)
     .order('created_at', { ascending: true });
 
-  console.error('[getGiftByToken] messages query — error:', msgError, '| count:', messages?.length ?? 0, '| rows:', messages?.map(m => ({ id: m.id, voice_url: m.voice_url })));
+  console.error('[getGiftByToken] messages — error:', msgError, '| count:', messages?.length ?? 0);
 
   if (msgError || !messages?.length) {
     console.error('[getGiftByToken] returning null after messages query failure or empty result');
     return null;
   }
 
-  // ── Signed URLs ─────────────────────────────────────────────────────────
+  // ── Query 3: count other gifts from same sender to same recipient ────────
+  const { count: moreCount, error: countError } = await supabase
+    .from('gifts')
+    .select('id', { count: 'exact', head: true })
+    .eq('author_id', gift.author_id)
+    .eq('recipient_id', gift.recipient_id)
+    .neq('id', gift.id);
+
+  if (countError) {
+    console.error('[getGiftByToken] more-gifts count error:', countError.message);
+  }
+  console.error('[getGiftByToken] moreGiftsCount:', moreCount);
+
+  // ── Signed URLs for voice + photos ──────────────────────────────────────
   const processedMessages = await Promise.all(
     messages.map(async (msg) => {
       const { data: voiceSigned, error: voiceErr } = await supabase.storage
@@ -103,36 +107,15 @@ export async function getGiftByToken(token: string): Promise<GiftData | null> {
     })
   );
 
-  // ── Author / people ──────────────────────────────────────────────────────
-  const person = gift.people as {
-    display_name?: string;
-    avatar_url?: string | null;
-    avatar_color?: string | null;
-  } | null;
-
-  console.error('[getGiftByToken] author (people) resolved:', person);
-
+  const person = gift.people as { display_name?: string } | null;
   const senderName = person?.display_name ?? 'Someone special';
-  const senderAvatarColor = person?.avatar_color ?? null;
 
-  let senderAvatarUrl: string | null = null;
-  if (person?.avatar_url) {
-    const { data, error: avatarErr } = await supabase.storage
-      .from('photos')
-      .createSignedUrl(person.avatar_url, TTL);
-    if (avatarErr) {
-      console.error('[getGiftByToken] avatar signed URL error for', person.avatar_url, ':', avatarErr);
-    }
-    senderAvatarUrl = data?.signedUrl ?? null;
-  }
-
-  console.error('[getGiftByToken] success — returning gift id:', gift.id, 'senderName:', senderName, 'messageCount:', processedMessages.length);
+  console.error('[getGiftByToken] success — senderName:', senderName, '| messages:', processedMessages.length, '| moreGiftsCount:', moreCount);
 
   return {
     id: gift.id,
     senderName,
-    senderAvatarUrl,
-    senderAvatarColor,
+    moreGiftsCount: moreCount ?? 0,
     messages: processedMessages,
   };
 }

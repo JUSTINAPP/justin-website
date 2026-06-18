@@ -6,6 +6,9 @@ import type { GiftData } from '@/lib/get-gift';
 
 const BARS = 11;
 const PHOTO_INTERVAL_MS = 4000;
+const APP_STORE_URL = 'https://apps.apple.com/au/app/justin/id1597447761';
+
+const GRADIENT = 'linear-gradient(172deg, #2b1d3a 0%, #4a2c47 28%, #8a4a5a 62%, #d98a6a 100%)';
 
 export default function GiftPlayer({ gift }: { gift: GiftData }) {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -17,6 +20,8 @@ export default function GiftPlayer({ gift }: { gift: GiftData }) {
   const message = gift.messages[0];
   const allPhotos = gift.messages.flatMap((m) => m.photoUrls);
   const caption = gift.messages.find((m) => m.caption)?.caption ?? null;
+  const { moreGiftsCount, senderName } = gift;
+  const senderFirstName = senderName.split(' ')[0];
 
   useEffect(() => {
     if (!isPlaying || allPhotos.length <= 1) return;
@@ -49,24 +54,22 @@ export default function GiftPlayer({ gift }: { gift: GiftData }) {
     return `${m}:${sec.toString().padStart(2, '0')}`;
   };
 
-  const initials = gift.senderName
-    .split(' ')
-    .map((w) => w[0])
-    .join('')
-    .slice(0, 2)
-    .toUpperCase();
-
-  const progress = duration ? currentTime / duration : 0;
+  const ctaCopy = moreGiftsCount > 0
+    ? 'Get the app to hear them all'
+    : 'Keep this forever, and send your own';
 
   return (
     <div
-      className="relative min-h-dvh flex flex-col items-center overflow-hidden"
       style={{
-        background:
-          'linear-gradient(to bottom, #4A3B6B 0%, #7B6BA8 38%, #C4849A 70%, #E8B48A 100%)',
+        height: '100dvh',
+        background: GRADIENT,
+        backgroundSize: '100% 180%',
+        animation: 'gradient-drift 10s ease-in-out infinite',
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'hidden',
       }}
     >
-      {/* Hidden audio element */}
       <audio
         ref={audioRef}
         src={message.voiceUrl}
@@ -82,229 +85,256 @@ export default function GiftPlayer({ gift }: { gift: GiftData }) {
         }}
       />
 
-      {/* Photo background — soft overlay, cross-fades while playing */}
-      {allPhotos.length > 0 && (
-        <div className="absolute inset-0 pointer-events-none">
-          {allPhotos.map((url, i) => (
+      {/* ── TOP: sender identity ──────────────────────────────────────────── */}
+      <div
+        style={{
+          flexShrink: 0,
+          textAlign: 'center',
+          padding: '48px 24px 16px',
+        }}
+      >
+        <p style={{
+          color: 'rgba(255,255,255,0.55)',
+          fontSize: 11,
+          fontWeight: 500,
+          letterSpacing: '0.15em',
+          textTransform: 'uppercase',
+          marginBottom: 8,
+        }}>
+          A message from
+        </p>
+        <p style={{
+          color: 'white',
+          fontSize: 28,
+          fontWeight: 500,
+          lineHeight: 1.2,
+          margin: 0,
+        }}>
+          {senderName}
+        </p>
+      </div>
+
+      {/* ── MIDDLE: scrollable player content ────────────────────────────── */}
+      <div
+        style={{
+          flex: 1,
+          minHeight: 0,
+          overflowY: 'auto',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          padding: '12px 24px 20px',
+          gap: 20,
+        }}
+      >
+        {/* Waveform */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 3, height: 32, flexShrink: 0 }}>
+          {Array.from({ length: BARS }, (_, i) => (
             <div
-              key={url}
-              className="absolute inset-0 transition-opacity duration-1500"
-              style={{ opacity: i === photoIndex ? 0.2 : 0 }}
-            >
-              <Image src={url} alt="" fill className="object-cover" unoptimized />
-            </div>
+              key={i}
+              style={{
+                width: 3,
+                height: 24,
+                borderRadius: 2,
+                background: 'rgba(255,255,255,0.7)',
+                transformOrigin: 'center',
+                animation: isPlaying
+                  ? `gift-waveform 0.85s ease-in-out ${(i * -0.08).toFixed(2)}s infinite`
+                  : 'none',
+                transform: isPlaying ? undefined : 'scaleY(0.25)',
+                transition: 'transform 0.4s ease',
+              }}
+            />
           ))}
         </div>
-      )}
 
-      {/* Main content */}
-      <div className="relative z-10 flex flex-col items-center w-full max-w-xs px-6 flex-1">
-
-        {/* Sender */}
-        <div className="mt-16 flex flex-col items-center gap-2">
-          {gift.senderAvatarUrl ? (
-            <Image
-              src={gift.senderAvatarUrl}
-              alt={gift.senderName}
-              width={72}
-              height={72}
-              className="rounded-full object-cover"
-              style={{ boxShadow: '0 0 0 3px rgba(255,255,255,0.3)' }}
-              unoptimized
-            />
+        {/* Play / Pause button — white circle, dark icon */}
+        <button
+          onClick={togglePlay}
+          aria-label={isPlaying ? 'Pause' : 'Play'}
+          style={{
+            width: 80,
+            height: 80,
+            borderRadius: '50%',
+            background: 'white',
+            border: 'none',
+            flexShrink: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
+            transition: 'transform 0.15s ease, box-shadow 0.15s ease',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'scale(1.06)';
+            e.currentTarget.style.boxShadow = '0 6px 32px rgba(0,0,0,0.38)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'scale(1)';
+            e.currentTarget.style.boxShadow = '0 4px 24px rgba(0,0,0,0.3)';
+          }}
+        >
+          {isPlaying ? (
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+              <rect x="5" y="3" width="5" height="20" rx="2" fill="#2b1d3a" />
+              <rect x="16" y="3" width="5" height="20" rx="2" fill="#2b1d3a" />
+            </svg>
           ) : (
-            <div
-              className="rounded-full flex items-center justify-center"
-              style={{
-                width: 72,
-                height: 72,
-                background: gift.senderAvatarColor ?? 'rgba(255,255,255,0.2)',
-                boxShadow: '0 0 0 3px rgba(255,255,255,0.3)',
-              }}
-            >
-              <span className="text-white text-xl font-semibold">{initials}</span>
-            </div>
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+              <path d="M9 4.5l14 8.5-14 8.5V4.5z" fill="#2b1d3a" />
+            </svg>
           )}
-          <p className="text-white/60 text-xs tracking-widest uppercase mt-1">from</p>
-          <p className="text-white text-2xl font-semibold -mt-1">{gift.senderName}</p>
+        </button>
+
+        {/* Progress bar + time */}
+        <div style={{ width: '100%', flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={{ position: 'relative', width: '100%', height: 3, borderRadius: 2, background: 'rgba(255,255,255,0.18)' }}>
+            <div style={{
+              position: 'absolute',
+              top: 0, left: 0,
+              height: 3,
+              borderRadius: 2,
+              background: 'rgba(255,255,255,0.75)',
+              width: `${duration ? (currentTime / duration) * 100 : 0}%`,
+              transition: 'width 0.1s linear',
+            }} />
+            <input
+              type="range"
+              min={0}
+              max={duration || 1}
+              step={0.1}
+              value={currentTime}
+              onChange={handleSeek}
+              style={{
+                position: 'absolute',
+                inset: 0,
+                width: '100%',
+                height: '100%',
+                opacity: 0,
+                cursor: 'pointer',
+                margin: 0,
+              }}
+            />
+          </div>
+          <p style={{
+            color: 'rgba(255,255,255,0.48)',
+            fontSize: 13,
+            fontVariantNumeric: 'tabular-nums',
+            textAlign: 'center',
+            margin: 0,
+          }}>
+            {fmt(currentTime)}{duration > 0 ? ` / ${fmt(duration)}` : ''}
+          </p>
         </div>
 
-        {/* Player area */}
-        <div className="flex-1 flex flex-col items-center justify-center gap-10 w-full py-10">
-
-          {/* Waveform */}
-          <div className="flex items-center gap-[3px]" style={{ height: 40 }}>
-            {Array.from({ length: BARS }, (_, i) => (
+        {/* Photos — bounded square, cross-fades */}
+        {allPhotos.length > 0 && (
+          <div style={{
+            position: 'relative',
+            width: 120,
+            height: 120,
+            borderRadius: 14,
+            overflow: 'hidden',
+            flexShrink: 0,
+            boxShadow: '0 8px 32px rgba(0,0,0,0.35)',
+          }}>
+            {allPhotos.map((url, i) => (
               <div
-                key={i}
+                key={url}
                 style={{
-                  width: 3,
-                  height: 24,
-                  borderRadius: 2,
-                  background: 'rgba(255,255,255,0.75)',
-                  transformOrigin: 'center',
-                  animation: isPlaying
-                    ? `gift-waveform 0.85s ease-in-out ${(i * -0.08).toFixed(2)}s infinite`
-                    : 'none',
-                  transform: isPlaying ? undefined : 'scaleY(0.25)',
-                  transition: 'transform 0.4s ease',
+                  position: 'absolute',
+                  inset: 0,
+                  opacity: i === photoIndex ? 1 : 0,
+                  transition: 'opacity 1.2s ease',
                 }}
-              />
+              >
+                <Image src={url} alt="" fill style={{ objectFit: 'cover' }} unoptimized />
+              </div>
             ))}
           </div>
+        )}
 
-          {/* Play / Pause button */}
-          <button
-            onClick={togglePlay}
-            aria-label={isPlaying ? 'Pause' : 'Play'}
-            style={{
-              width: 80,
-              height: 80,
-              borderRadius: '50%',
-              background: 'rgba(255,255,255,0.18)',
-              border: '2px solid rgba(255,255,255,0.4)',
-              backdropFilter: 'blur(8px)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              transition: 'transform 0.15s ease, background 0.15s ease',
-            }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.background = 'rgba(255,255,255,0.28)')
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.background = 'rgba(255,255,255,0.18)')
-            }
-          >
-            {isPlaying ? (
-              <svg width="26" height="26" viewBox="0 0 26 26" fill="white">
-                <rect x="5" y="3" width="5" height="20" rx="2" />
-                <rect x="16" y="3" width="5" height="20" rx="2" />
-              </svg>
-            ) : (
-              <svg width="26" height="26" viewBox="0 0 26 26" fill="white">
-                <path d="M7 3l17 10L7 23V3z" />
-              </svg>
-            )}
-          </button>
-
-          {/* Progress */}
-          <div className="w-full flex flex-col gap-2">
-            <div className="relative w-full h-1 rounded-full" style={{ background: 'rgba(255,255,255,0.2)' }}>
-              <div
-                className="absolute top-0 left-0 h-1 rounded-full"
-                style={{
-                  width: `${progress * 100}%`,
-                  background: 'rgba(255,255,255,0.85)',
-                  transition: 'width 0.1s linear',
-                }}
-              />
-              <input
-                type="range"
-                min={0}
-                max={duration || 1}
-                step={0.1}
-                value={currentTime}
-                onChange={handleSeek}
-                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                style={{ margin: 0 }}
-              />
-            </div>
-            <div
-              className="flex justify-between text-xs"
-              style={{ color: 'rgba(255,255,255,0.55)' }}
-            >
-              <span>{fmt(currentTime)}</span>
-              <span>{fmt(duration)}</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Caption / words */}
+        {/* Caption */}
         {caption && (
-          <div
-            className="w-full mb-6 rounded-2xl px-5 py-4"
-            style={{
-              background: 'rgba(255,255,255,0.1)',
-              backdropFilter: 'blur(6px)',
-              border: '1px solid rgba(255,255,255,0.15)',
-            }}
-          >
-            <p
-              className="text-sm leading-relaxed"
-              style={{ color: 'rgba(255,255,255,0.9)', fontStyle: 'italic' }}
-            >
-              {caption}
-            </p>
-          </div>
+          <p style={{
+            color: 'rgba(255,255,255,0.88)',
+            fontSize: 17,
+            fontStyle: 'italic',
+            lineHeight: 1.55,
+            textAlign: 'center',
+            margin: 0,
+          }}>
+            {caption}
+          </p>
         )}
       </div>
 
-      {/* ── CTA ──────────────────────────────────────────────────────────── */}
-      <div className="relative z-10 w-full max-w-xs px-6 pb-14 flex flex-col items-center">
-
+      {/* ── BOTTOM: hook + CTA — always above fold ────────────────────────── */}
+      <div style={{
+        flexShrink: 0,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: '0 24px 28px',
+        gap: 12,
+      }}>
         {/* Divider */}
-        <div style={{ width: 32, height: 1, background: 'rgba(255,255,255,0.18)', marginBottom: 36 }} />
+        <div style={{ width: '100%', height: 1, background: 'rgba(255,255,255,0.1)', marginBottom: 2 }} />
 
-        {/* Sender attribution — warm, personal */}
-        <p
-          className="text-center"
-          style={{ color: 'rgba(255,255,255,0.78)', fontSize: 16, fontWeight: 500, lineHeight: 1.55, marginBottom: 10 }}
-        >
-          {gift.senderName} made this for you on Justin.
-        </p>
+        {/* More messages pill */}
+        {moreGiftsCount > 0 && (
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 6,
+            background: 'rgba(255,255,255,0.1)',
+            border: '1px solid rgba(255,255,255,0.18)',
+            borderRadius: 50,
+            padding: '7px 14px',
+          }}>
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+              <rect x="0.6" y="2.6" width="11.8" height="7.8" rx="1.4" stroke="rgba(255,255,255,0.7)" strokeWidth="1.2" />
+              <path d="M0.6 4.5l5.9 3.3 5.9-3.3" stroke="rgba(255,255,255,0.7)" strokeWidth="1.2" strokeLinecap="round" />
+            </svg>
+            <span style={{
+              color: 'rgba(255,255,255,0.85)',
+              fontSize: 13,
+              fontWeight: 500,
+            }}>
+              {senderFirstName} left you {moreGiftsCount} more {moreGiftsCount === 1 ? 'message' : 'messages'}
+            </span>
+          </div>
+        )}
 
-        {/* Invitation copy */}
-        <p
-          className="text-center"
-          style={{ color: 'rgba(255,255,255,0.48)', fontSize: 14, lineHeight: 1.65, maxWidth: 248, marginBottom: 32 }}
-        >
-          Keep it forever, and send your own voice gift to someone you love.
-        </p>
-
-        {/*
-          App Store button.
-          TODO: replace href="#" with the real App Store URL when the app is live,
-          e.g. https://apps.apple.com/au/app/justin/id000000000
-        */}
+        {/* App Store CTA */}
         <a
-          href="#"
+          href={APP_STORE_URL}
           style={{
             display: 'flex',
+            flexDirection: 'column',
             alignItems: 'center',
-            gap: 11,
-            background: 'rgba(255,255,255,0.93)',
-            color: '#2e2540',
-            padding: '13px 26px',
-            borderRadius: 100,
+            gap: 3,
+            width: '100%',
+            background: 'white',
+            borderRadius: 14,
+            padding: '14px 20px',
             textDecoration: 'none',
-            boxShadow: '0 4px 24px rgba(0,0,0,0.18)',
+            boxShadow: '0 4px 24px rgba(0,0,0,0.22)',
           }}
         >
-          {/* Apple logo */}
-          <svg width="17" height="21" viewBox="0 0 814 1000" fill="#2e2540" aria-hidden>
-            <path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-57.8-155.5-127.4C46 405.1 18.4 343 7 293.7c-1-4.1-1.6-8.4-1.6-12.8 0-5.8.6-11.6 1.6-17.2 38.1-161.5 204.5-233.9 284.3-233.9 64.4 0 118.5 41 158.8 41 38.4 0 98.6-43 170.3-43 27.4 0 130.4 2.6 198.9 88.1l.8 1zm-234.3-170.6c31.1-36.9 53.1-88.1 53.1-139.3 0-7.2-.6-14.3-1.9-21.1-52.6 2-115 35.1-148.8 72.3-28.5 32.4-55.1 83.6-55.1 135.5 0 7.8 1.3 15.5 1.9 18 3.2.6 8.4 1.3 13.6 1.3 47.8 0 109.3-31.8 137.2-66.7z" />
-          </svg>
-          <div style={{ lineHeight: 1.25 }}>
-            <div style={{ fontSize: 10, color: 'rgba(46,37,64,0.55)', fontWeight: 500 }}>Download on the</div>
-            <div style={{ fontSize: 15, fontWeight: 700 }}>App Store</div>
-          </div>
+          <span style={{ color: 'rgba(43,29,58,0.55)', fontSize: 12, fontWeight: 400 }}>
+            {ctaCopy}
+          </span>
+          <span style={{ color: '#2b1d3a', fontSize: 17, fontWeight: 700 }}>
+            Download Justin
+          </span>
         </a>
 
-        <p style={{ color: 'rgba(255,255,255,0.32)', fontSize: 12, marginTop: 12 }}>
-          Free on iPhone
-        </p>
-
-        {/* Made with Justin wordmark */}
-        <div
-          style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 40, color: 'rgba(255,255,255,0.30)', fontSize: 12 }}
-        >
-          <span>Made with</span>
-          <span style={{ fontWeight: 700, color: 'rgba(255,255,255,0.45)' }}>just</span>
-          <span style={{ fontWeight: 700, color: 'rgba(244,184,204,0.48)' }}>in</span>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+          <p style={{ color: 'rgba(255,255,255,0.38)', fontSize: 12, margin: 0 }}>Free on iPhone</p>
+          <p style={{ color: 'rgba(255,255,255,0.2)', fontSize: 11, margin: 0 }}>Made with Justin</p>
         </div>
-
       </div>
     </div>
   );
