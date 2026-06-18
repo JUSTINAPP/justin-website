@@ -95,6 +95,9 @@ export default function GiftPlayer({ gift }: { gift: GiftData }) {
         }}
       />
 
+      {/* Centered content column — gradient fills full viewport behind it */}
+      <div style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column', width: '100%', maxWidth: 440, marginLeft: 'auto', marginRight: 'auto' }}>
+
       {/* ── TOP: sender identity ──────────────────────────────────────────── */}
       <div style={{ flexShrink: 0, textAlign: 'center', padding: '48px 24px 16px' }}>
         <p style={{
@@ -279,6 +282,8 @@ export default function GiftPlayer({ gift }: { gift: GiftData }) {
           Free on iPhone
         </p>
       </div>
+
+      </div>{/* end centered content column */}
     </div>
   );
 }
