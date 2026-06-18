@@ -4,11 +4,21 @@ import { useRef, useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import type { GiftData } from '@/lib/get-gift';
 
-const BARS = 11;
+// Waveform bar idle heights (px) — looks like a voice waveform at rest
+const IDLE_H = [10, 19, 30, 14, 36, 24, 11, 32, 17, 27, 10];
+const MAX_H = 36;
+
 const PHOTO_INTERVAL_MS = 4000;
 const APP_STORE_URL = 'https://apps.apple.com/au/app/justin/id1597447761';
-
 const GRADIENT = 'linear-gradient(172deg, #2b1d3a 0%, #4a2c47 28%, #8a4a5a 62%, #d98a6a 100%)';
+
+function AppleLogo() {
+  return (
+    <svg width="16" height="20" viewBox="0 0 15 18" fill="#2b1d3a" aria-hidden>
+      <path d="M12.3 9.5c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-3 .9-3.7.9-.7 0-1.9-.9-3.1-.9-1.6 0-3.1.9-3.9 2.4C.5 8.9 1.5 13 3 15.1c.7 1.1 1.6 2.3 2.7 2.3 1.1 0 1.5-.7 2.9-.7 1.3 0 1.7.7 2.9.7 1.2 0 2-1.1 2.7-2.2.9-1.3 1.3-2.5 1.3-2.6 0 0-2.2-.9-2.2-3.1zM10.2 2.7c.6-.8 1-1.8.9-2.9-.9 0-2 .6-2.6 1.4C7.9 2 7.5 3 7.6 4c1 .1 2-.5 2.6-1.3z" />
+    </svg>
+  );
+}
 
 export default function GiftPlayer({ gift }: { gift: GiftData }) {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -22,6 +32,10 @@ export default function GiftPlayer({ gift }: { gift: GiftData }) {
   const caption = gift.messages.find((m) => m.caption)?.caption ?? null;
   const { moreGiftsCount, senderName } = gift;
   const senderFirstName = senderName.split(' ')[0];
+
+  const pillCopy = moreGiftsCount > 0
+    ? `${senderFirstName} left you ${moreGiftsCount} more ${moreGiftsCount === 1 ? 'message' : 'messages'}`
+    : `${senderFirstName} may send you more on Justin`;
 
   useEffect(() => {
     if (!isPlaying || allPhotos.length <= 1) return;
@@ -54,10 +68,6 @@ export default function GiftPlayer({ gift }: { gift: GiftData }) {
     return `${m}:${sec.toString().padStart(2, '0')}`;
   };
 
-  const ctaCopy = moreGiftsCount > 0
-    ? 'Get the app to hear them all'
-    : 'Keep this forever, and send your own';
-
   return (
     <div
       style={{
@@ -86,13 +96,7 @@ export default function GiftPlayer({ gift }: { gift: GiftData }) {
       />
 
       {/* ── TOP: sender identity ──────────────────────────────────────────── */}
-      <div
-        style={{
-          flexShrink: 0,
-          textAlign: 'center',
-          padding: '48px 24px 16px',
-        }}
-      >
+      <div style={{ flexShrink: 0, textAlign: 'center', padding: '48px 24px 16px' }}>
         <p style={{
           color: 'rgba(255,255,255,0.55)',
           fontSize: 11,
@@ -103,52 +107,44 @@ export default function GiftPlayer({ gift }: { gift: GiftData }) {
         }}>
           A message from
         </p>
-        <p style={{
-          color: 'white',
-          fontSize: 28,
-          fontWeight: 500,
-          lineHeight: 1.2,
-          margin: 0,
-        }}>
+        <p style={{ color: 'white', fontSize: 28, fontWeight: 500, lineHeight: 1.2, margin: 0 }}>
           {senderName}
         </p>
       </div>
 
       {/* ── MIDDLE: scrollable player content ────────────────────────────── */}
-      <div
-        style={{
-          flex: 1,
-          minHeight: 0,
-          overflowY: 'auto',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          padding: '12px 24px 20px',
-          gap: 20,
-        }}
-      >
-        {/* Waveform */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 3, height: 32, flexShrink: 0 }}>
-          {Array.from({ length: BARS }, (_, i) => (
+      <div style={{
+        flex: 1,
+        minHeight: 0,
+        overflowY: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: '16px 24px 20px',
+        gap: 20,
+      }}>
+
+        {/* Waveform bars — bottom-aligned so they grow upward */}
+        <div style={{ display: 'flex', alignItems: 'flex-end', gap: 4, height: MAX_H, flexShrink: 0 }}>
+          {IDLE_H.map((idleH, i) => (
             <div
               key={i}
               style={{
                 width: 3,
-                height: 24,
+                height: isPlaying ? MAX_H : idleH,
                 borderRadius: 2,
-                background: 'rgba(255,255,255,0.7)',
-                transformOrigin: 'center',
+                background: 'rgba(255,255,255,0.78)',
+                transformOrigin: 'bottom',
                 animation: isPlaying
-                  ? `gift-waveform 0.85s ease-in-out ${(i * -0.08).toFixed(2)}s infinite`
+                  ? `gift-waveform ${0.7 + (i % 3) * 0.11}s ease-in-out ${(i * -0.07).toFixed(2)}s infinite`
                   : 'none',
-                transform: isPlaying ? undefined : 'scaleY(0.25)',
-                transition: 'transform 0.4s ease',
+                transition: 'height 0.45s ease',
               }}
             />
           ))}
         </div>
 
-        {/* Play / Pause button — white circle, dark icon */}
+        {/* Play / Pause — white circle, dark icon */}
         <button
           onClick={togglePlay}
           aria-label={isPlaying ? 'Pause' : 'Play'}
@@ -191,64 +187,28 @@ export default function GiftPlayer({ gift }: { gift: GiftData }) {
         <div style={{ width: '100%', flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
           <div style={{ position: 'relative', width: '100%', height: 3, borderRadius: 2, background: 'rgba(255,255,255,0.18)' }}>
             <div style={{
-              position: 'absolute',
-              top: 0, left: 0,
-              height: 3,
-              borderRadius: 2,
+              position: 'absolute', top: 0, left: 0,
+              height: 3, borderRadius: 2,
               background: 'rgba(255,255,255,0.75)',
               width: `${duration ? (currentTime / duration) * 100 : 0}%`,
               transition: 'width 0.1s linear',
             }} />
             <input
-              type="range"
-              min={0}
-              max={duration || 1}
-              step={0.1}
-              value={currentTime}
+              type="range" min={0} max={duration || 1} step={0.1} value={currentTime}
               onChange={handleSeek}
-              style={{
-                position: 'absolute',
-                inset: 0,
-                width: '100%',
-                height: '100%',
-                opacity: 0,
-                cursor: 'pointer',
-                margin: 0,
-              }}
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0, cursor: 'pointer', margin: 0 }}
             />
           </div>
-          <p style={{
-            color: 'rgba(255,255,255,0.48)',
-            fontSize: 13,
-            fontVariantNumeric: 'tabular-nums',
-            textAlign: 'center',
-            margin: 0,
-          }}>
+          <p style={{ color: 'rgba(255,255,255,0.48)', fontSize: 13, fontVariantNumeric: 'tabular-nums', textAlign: 'center', margin: 0 }}>
             {fmt(currentTime)}{duration > 0 ? ` / ${fmt(duration)}` : ''}
           </p>
         </div>
 
         {/* Photos — bounded square, cross-fades */}
         {allPhotos.length > 0 && (
-          <div style={{
-            position: 'relative',
-            width: 120,
-            height: 120,
-            borderRadius: 14,
-            overflow: 'hidden',
-            flexShrink: 0,
-            boxShadow: '0 8px 32px rgba(0,0,0,0.35)',
-          }}>
+          <div style={{ position: 'relative', width: 120, height: 120, borderRadius: 14, overflow: 'hidden', flexShrink: 0, boxShadow: '0 8px 32px rgba(0,0,0,0.35)' }}>
             {allPhotos.map((url, i) => (
-              <div
-                key={url}
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  opacity: i === photoIndex ? 1 : 0,
-                  transition: 'opacity 1.2s ease',
-                }}
-              >
+              <div key={url} style={{ position: 'absolute', inset: 0, opacity: i === photoIndex ? 1 : 0, transition: 'opacity 1.2s ease' }}>
                 <Image src={url} alt="" fill style={{ objectFit: 'cover' }} unoptimized />
               </div>
             ))}
@@ -257,64 +217,45 @@ export default function GiftPlayer({ gift }: { gift: GiftData }) {
 
         {/* Caption */}
         {caption && (
-          <p style={{
-            color: 'rgba(255,255,255,0.88)',
-            fontSize: 17,
-            fontStyle: 'italic',
-            lineHeight: 1.55,
-            textAlign: 'center',
-            margin: 0,
-          }}>
+          <p style={{ color: 'rgba(255,255,255,0.88)', fontSize: 17, fontStyle: 'italic', lineHeight: 1.55, textAlign: 'center', margin: 0 }}>
             {caption}
           </p>
         )}
       </div>
 
-      {/* ── BOTTOM: hook + CTA — always above fold ────────────────────────── */}
-      <div style={{
-        flexShrink: 0,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: '0 24px 28px',
-        gap: 12,
-      }}>
+      {/* ── BOTTOM: hook + CTA — pinned, always above fold ───────────────── */}
+      <div style={{ flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0 24px 28px', gap: 12 }}>
+
         {/* Divider */}
         <div style={{ width: '100%', height: 1, background: 'rgba(255,255,255,0.1)', marginBottom: 2 }} />
 
-        {/* More messages pill */}
-        {moreGiftsCount > 0 && (
-          <div style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 6,
-            background: 'rgba(255,255,255,0.1)',
-            border: '1px solid rgba(255,255,255,0.18)',
-            borderRadius: 50,
-            padding: '7px 14px',
-          }}>
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-              <rect x="0.6" y="2.6" width="11.8" height="7.8" rx="1.4" stroke="rgba(255,255,255,0.7)" strokeWidth="1.2" />
-              <path d="M0.6 4.5l5.9 3.3 5.9-3.3" stroke="rgba(255,255,255,0.7)" strokeWidth="1.2" strokeLinecap="round" />
-            </svg>
-            <span style={{
-              color: 'rgba(255,255,255,0.85)',
-              fontSize: 13,
-              fontWeight: 500,
-            }}>
-              {senderFirstName} left you {moreGiftsCount} more {moreGiftsCount === 1 ? 'message' : 'messages'}
-            </span>
-          </div>
-        )}
+        {/* More messages pill — always present */}
+        <div style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 6,
+          background: 'rgba(255,255,255,0.1)',
+          border: '1px solid rgba(255,255,255,0.18)',
+          borderRadius: 50,
+          padding: '7px 14px',
+        }}>
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden>
+            <rect x="0.6" y="2.6" width="11.8" height="7.8" rx="1.4" stroke="rgba(255,255,255,0.7)" strokeWidth="1.2" />
+            <path d="M0.6 4.5l5.9 3.3 5.9-3.3" stroke="rgba(255,255,255,0.7)" strokeWidth="1.2" strokeLinecap="round" />
+          </svg>
+          <span style={{ color: 'rgba(255,255,255,0.85)', fontSize: 13, fontWeight: 500 }}>
+            {pillCopy}
+          </span>
+        </div>
 
         {/* App Store CTA */}
         <a
           href={APP_STORE_URL}
           style={{
             display: 'flex',
-            flexDirection: 'column',
+            flexDirection: 'row',
             alignItems: 'center',
-            gap: 3,
+            gap: 12,
             width: '100%',
             background: 'white',
             borderRadius: 14,
@@ -323,18 +264,20 @@ export default function GiftPlayer({ gift }: { gift: GiftData }) {
             boxShadow: '0 4px 24px rgba(0,0,0,0.22)',
           }}
         >
-          <span style={{ color: 'rgba(43,29,58,0.55)', fontSize: 12, fontWeight: 400 }}>
-            {ctaCopy}
-          </span>
-          <span style={{ color: '#2b1d3a', fontSize: 17, fontWeight: 700 }}>
-            Download Justin
-          </span>
+          <AppleLogo />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+            <span style={{ color: 'rgba(43,29,58,0.55)', fontSize: 12, fontWeight: 400 }}>
+              Get the app to hear them all
+            </span>
+            <span style={{ color: '#2b1d3a', fontSize: 17, fontWeight: 700 }}>
+              Download Justin
+            </span>
+          </div>
         </a>
 
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-          <p style={{ color: 'rgba(255,255,255,0.38)', fontSize: 12, margin: 0 }}>Free on iPhone</p>
-          <p style={{ color: 'rgba(255,255,255,0.2)', fontSize: 11, margin: 0 }}>Made with Justin</p>
-        </div>
+        <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 12, margin: 0 }}>
+          Free on iPhone
+        </p>
       </div>
     </div>
   );
