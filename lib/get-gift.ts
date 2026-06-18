@@ -29,14 +29,24 @@ export async function getGiftByToken(token: string): Promise<GiftData | null> {
   const supabase = createAdminClient();
 
   // ── Query 1: gift row + author (people join) ─────────────────────────────
-  console.error('[getGiftByToken] querying gifts table with share_token =', token);
+  // Use people!author_id(...) to disambiguate: gifts has two FKs to people
+  // (author_id and recipient_id) and PostgREST requires an explicit hint.
+  const giftSelect = 'id, author_id, people!author_id(display_name, avatar_url, avatar_color)';
+  console.error('[getGiftByToken] gifts query select:', giftSelect);
+  console.error('[getGiftByToken] gifts query share_token =', token);
+
   const { data: gift, error: giftError } = await supabase
     .from('gifts')
-    .select('id, author_id, people(display_name, avatar_url, avatar_color)')
+    .select(giftSelect)
     .eq('share_token', token)
     .single();
 
-  console.error('[getGiftByToken] gifts query — error:', giftError, '| data:', gift
+  console.error('[getGiftByToken] gifts query error (raw):', giftError);
+  console.error('[getGiftByToken] gifts query error (JSON):', JSON.stringify(giftError));
+  if (giftError) {
+    console.error('[getGiftByToken] gifts error — message:', giftError.message, '| code:', giftError.code, '| details:', giftError.details, '| hint:', giftError.hint);
+  }
+  console.error('[getGiftByToken] gifts query data:', gift
     ? { id: gift.id, author_id: gift.author_id, people: gift.people }
     : null
   );
