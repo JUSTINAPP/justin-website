@@ -12,13 +12,6 @@ const PHOTO_INTERVAL_MS = 4000;
 const APP_STORE_URL = 'https://apps.apple.com/au/app/justin/id1597447761';
 const GRADIENT = 'linear-gradient(172deg, #2b1d3a 0%, #4a2c47 28%, #8a4a5a 62%, #d98a6a 100%)';
 
-function AppleLogo() {
-  return (
-    <svg width="16" height="20" viewBox="0 0 15 18" fill="#2b1d3a" aria-hidden>
-      <path d="M12.3 9.5c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-3 .9-3.7.9-.7 0-1.9-.9-3.1-.9-1.6 0-3.1.9-3.9 2.4C.5 8.9 1.5 13 3 15.1c.7 1.1 1.6 2.3 2.7 2.3 1.1 0 1.5-.7 2.9-.7 1.3 0 1.7.7 2.9.7 1.2 0 2-1.1 2.7-2.2.9-1.3 1.3-2.5 1.3-2.6 0 0-2.2-.9-2.2-3.1zM10.2 2.7c.6-.8 1-1.8.9-2.9-.9 0-2 .6-2.6 1.4C7.9 2 7.5 3 7.6 4c1 .1 2-.5 2.6-1.3z" />
-    </svg>
-  );
-}
 
 export default function GiftPlayer({ gift }: { gift: GiftData }) {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -251,34 +244,49 @@ export default function GiftPlayer({ gift }: { gift: GiftData }) {
           </span>
         </div>
 
-        {/* App Store CTA */}
+        {/* App Store CTA — centered, capped width, PNG Apple logo */}
         <a
           href={APP_STORE_URL}
           style={{
-            display: 'flex',
+            alignSelf: 'center',
+            display: 'inline-flex',
             flexDirection: 'row',
             alignItems: 'center',
-            gap: 12,
+            justifyContent: 'center',
+            gap: 10,
+            maxWidth: 320,
             width: '100%',
             background: 'white',
-            borderRadius: 14,
-            padding: '14px 20px',
+            borderRadius: 16,
+            padding: '12px 24px',
             textDecoration: 'none',
             boxShadow: '0 4px 24px rgba(0,0,0,0.22)',
           }}
         >
-          <AppleLogo />
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            <span style={{ color: 'rgba(43,29,58,0.55)', fontSize: 12, fontWeight: 400 }}>
+          {/*
+            The PNG is 1536×864 (landscape) with transparent padding around
+            the black logo. height:32 / width:auto renders it at ~57px wide;
+            the visible logo is ~26px tall. Transparent padding blends into
+            the white button, so the logo sits crisp with no extra clipping needed.
+          */}
+          <Image
+            src="/Apple-Logo-1536x864.png"
+            alt=""
+            width={1536}
+            height={864}
+            style={{ height: 32, width: 'auto', display: 'block', flexShrink: 0 }}
+          />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+            <span style={{ color: 'rgba(43,29,58,0.5)', fontSize: 11, fontWeight: 400, whiteSpace: 'nowrap' }}>
               Get the app to hear them all
             </span>
-            <span style={{ color: '#2b1d3a', fontSize: 17, fontWeight: 700 }}>
+            <span style={{ color: '#2b1d3a', fontSize: 16, fontWeight: 700, whiteSpace: 'nowrap' }}>
               Download Justin
             </span>
           </div>
         </a>
 
-        <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 12, margin: 0 }}>
+        <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 12, margin: 0, textAlign: 'center' }}>
           Free on iPhone
         </p>
       </div>
