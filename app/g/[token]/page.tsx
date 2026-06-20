@@ -11,10 +11,26 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { token } = await params;
   const gift = await getGiftByToken(token);
-  if (!gift) return { title: 'Gift not found — Justin' };
+
+  if (!gift) {
+    return {
+      title: 'A voice message — Justin',
+      openGraph: { title: 'A voice message for you', description: 'Open it on Justin.' },
+      twitter: { card: 'summary_large_image', title: 'A voice message for you', description: 'Open it on Justin.' },
+    };
+  }
+
+  const firstName = gift.senderName.split(' ')[0];
+  const title = `${firstName} made you something`;
+  const description = 'A little voice message, just for you.';
+
   return {
-    title: `A voice gift from ${gift.senderName} — Justin`,
-    description: 'Someone sent you a voice gift. Open it.',
+    title: `${title} — Justin`,
+    description,
+    // Explicitly set og: fields so they override the root layout's generic values.
+    // og:image is handled automatically by opengraph-image.tsx in this segment.
+    openGraph: { title, description },
+    twitter: { card: 'summary_large_image', title, description },
   };
 }
 
