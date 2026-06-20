@@ -4,6 +4,13 @@ import { useRef, useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import type { GiftData } from '@/lib/get-gift';
 
+function recordOpen(token: string) {
+  // Fire-and-forget: never blocks playback, never throws to the caller.
+  fetch(`/api/gift/${token}/opened`, { method: 'POST' })
+    .then(res => console.log('[GiftPlayer] open recorded, status:', res.status))
+    .catch(err => console.warn('[GiftPlayer] open recording failed (non-fatal):', err));
+}
+
 // Waveform bar idle heights (px) — looks like a voice waveform at rest
 const IDLE_H = [10, 19, 30, 14, 36, 24, 11, 32, 17, 27, 10];
 const MAX_H = 36;
@@ -13,12 +20,21 @@ const APP_STORE_URL = 'https://apps.apple.com/au/app/justin/id1597447761';
 const GRADIENT = 'linear-gradient(172deg, #2b1d3a 0%, #4a2c47 28%, #8a4a5a 62%, #d98a6a 100%)';
 
 
-export default function GiftPlayer({ gift }: { gift: GiftData }) {
+export default function GiftPlayer({ gift, token }: { gift: GiftData; token: string }) {
   const audioRef = useRef<HTMLAudioElement>(null);
+  const hasLoggedOpen = useRef(false); // fires recordOpen exactly once per session
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [photoIndex, setPhotoIndex] = useState(0);
+
+  // Record the open on the first real play — not on page load (could be a link-preview
+  // crawler or accidental tap). useRef guard ensures we call it at most once.
+  useEffect(() => {
+    if (!isPlaying || hasLoggedOpen.current) return;
+    hasLoggedOpen.current = true;
+    recordOpen(token);
+  }, [isPlaying, token]);
 
   const message = gift.messages[0];
   const allPhotos = gift.messages.flatMap((m) => m.photoUrls);

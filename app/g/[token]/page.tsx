@@ -63,5 +63,5 @@ export default async function GiftPage({
     );
   }
 
-  return <GiftPlayer gift={gift} />;
+  return <GiftPlayer gift={gift} token={token} />;
 }
