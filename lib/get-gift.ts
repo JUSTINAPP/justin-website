@@ -10,6 +10,7 @@ export type GiftMessage = {
 export type GiftData = {
   id: string;
   senderName: string;
+  claimCode: string | null;
   moreGiftsCount: number;
   messages: GiftMessage[];
 };
@@ -30,7 +31,7 @@ export async function getGiftByToken(token: string): Promise<GiftData | null> {
   // people!author_id disambiguates: gifts has two FKs to people (author_id + recipient_id)
   const { data: gift, error: giftError } = await supabase
     .from('gifts')
-    .select('id, author_id, recipient_id, people!author_id(display_name)')
+    .select('id, author_id, recipient_id, claim_code, people!author_id(display_name)')
     .eq('share_token', token)
     .single();
 
@@ -112,9 +113,12 @@ export async function getGiftByToken(token: string): Promise<GiftData | null> {
 
   console.error('[getGiftByToken] success — senderName:', senderName, '| messages:', processedMessages.length, '| moreGiftsCount:', moreCount);
 
+  const claimCode = (gift.claim_code as string | null) ?? null;
+
   return {
     id: gift.id,
     senderName,
+    claimCode,
     moreGiftsCount: moreCount ?? 0,
     messages: processedMessages,
   };

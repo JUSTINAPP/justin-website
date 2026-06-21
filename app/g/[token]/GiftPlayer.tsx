@@ -27,6 +27,7 @@ export default function GiftPlayer({ gift, token }: { gift: GiftData; token: str
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration]     = useState(0);
   const [photoIndex, setPhotoIndex] = useState(0);
+  const [codeCopied, setCodeCopied] = useState(false);
 
   const message    = gift.messages[0];
   const allPhotos  = gift.messages.flatMap((m) => m.photoUrls);
@@ -71,6 +72,15 @@ export default function GiftPlayer({ gift, token }: { gift: GiftData; token: str
   useEffect(() => () => {
     if (slideshowTimer.current) clearTimeout(slideshowTimer.current);
   }, []);
+
+  // ── Claim code copy ────────────────────────────────────────────────────────
+  const copyCode = useCallback(() => {
+    if (!gift.claimCode) return;
+    navigator.clipboard.writeText(gift.claimCode).then(() => {
+      setCodeCopied(true);
+      setTimeout(() => setCodeCopied(false), 2000);
+    }).catch(() => {/* clipboard unavailable */});
+  }, [gift.claimCode]);
 
   // ── Audio controls ─────────────────────────────────────────────────────────
   const togglePlay = useCallback(async () => {
@@ -201,6 +211,31 @@ export default function GiftPlayer({ gift, token }: { gift: GiftData; token: str
           <span style={{ color: '#2b1d3a', fontSize: 16, fontWeight: 700, whiteSpace: 'nowrap' }}>Download Justin</span>
         </div>
       </a>
+      {gift.claimCode && (
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+          <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 11, margin: 0 }}>Your gift code</p>
+          <button
+            onClick={copyCode}
+            style={{
+              background: 'rgba(255,255,255,0.08)',
+              border: '1px solid rgba(255,255,255,0.14)',
+              borderRadius: 8,
+              padding: '6px 14px',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 8,
+            }}
+          >
+            <span style={{ color: 'rgba(255,255,255,0.9)', fontSize: 14, fontWeight: 600, letterSpacing: '0.06em', fontFamily: 'ui-monospace, monospace' }}>
+              {gift.claimCode}
+            </span>
+            <span style={{ color: codeCopied ? '#d98a6a' : 'rgba(255,255,255,0.35)', fontSize: 11, transition: 'color 0.2s' }}>
+              {codeCopied ? '✓ copied' : 'copy'}
+            </span>
+          </button>
+        </div>
+      )}
       <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 12, margin: 0, textAlign: 'center' }}>Free on iPhone</p>
     </div>
   );
