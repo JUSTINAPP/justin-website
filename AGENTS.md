@@ -58,3 +58,41 @@ SUPABASE_SERVICE_ROLE_KEY=<service role key from Supabase dashboard → Project 
 ```
 
 `.env*` is in `.gitignore` — these are never committed.
+justinapp.com.au — Next.js (newer version; APIs/structure may differ from training data — READ node_modules/next/dist/docs/ before writing code) + Tailwind, hosted on Vercel. Hosts the marketing site AND the Justin gift "taste page".
+
+## The taste page: /g/[token]
+When a giver shares a gift, the recipient opens https://justinapp.com.au/g/{share_token} and hears the gift in the browser (no app needed).
+
+### Security model (firm — do NOT loosen)
+- A server-side route loads the gift by share_token using the Supabase SERVICE ROLE key (server-only; NEVER NEXT_PUBLIC / never in the browser).
+- It generates SHORT-LIVED SIGNED URLs from the PRIVATE `voice` and `photos` storage buckets. Do NOT make buckets public. Do NOT expose the gifts table publicly.
+- Exposes ONLY the one gift matched by token, plus a COUNT of the sender's other gifts to that recipient (not their content).
+- Invalid token → styled "This gift couldn't be found" page.
+
+### Data (Supabase, same project as the app)
+- gifts: id, author_id, recipient_id, title, status, accepted, created_at, share_token.
+- Sender = gifts.author_id joined to people via the EXPLICIT relationship people!author_id (gifts has TWO FKs to people — author_id AND recipient_id — so a bare people(...) embed is ambiguous and errors; must specify author_id).
+- people: display_name, avatar_url (path in `photos` bucket under avatars/{owner_id}/...), avatar_color.
+- messages: voice_url, photo_urls (text[]), caption (typed words).
+- "More messages" count = gifts where author_id = this sender AND recipient_id = this recipient (beyond the one viewed). NOTE: recipient_id is often null on gifts to new recipients, so the count is frequently 0 — the pill copy handles this (see below).
+
+### Env vars (set in Vercel Production+Preview AND .env.local locally)
+- SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY. (.env.local must stay gitignored.)
+- Vercel only applies env vars on a NEW deployment — redeploy after changing them.
+
+### Design (current, approved)
+- Warm sunrise gradient background (deep aubergine #2b1d3a → plum → coral/peach #d98a6a, ~172deg), fills full viewport.
+- No avatar image; hierarchy: "A MESSAGE FROM" / large sender name / waveform bars / large white play button / time / italic words / divider / "more messages" pill / App Store CTA.
+- "More messages" pill ALWAYS present: "[Sender] left you N more messages" when count>0; honest softer copy "[Sender] may send you more on Justin" when 0/unknown (never claim a false number).
+- CTA: Apple logo + "Get the app to hear them all" + "Download Justin" → https://apps.apple.com/au/app/justin/id1597447761 + "Free on iPhone". No "Made with Justin" line.
+- MOBILE-FIRST: 100dvh; name + play + CTA above the fold on standard iPhones. Content column capped ~400-440px and centered on desktop (button not stretched full-width); gradient fills full background behind it.
+
+## Status
+Taste page is LIVE and working (plays a real gift, polished, mobile + desktop). This is the FRONT HALF of the receiving loop.
+
+## Not built here (other pieces, mostly in the iOS app)
+- Convergence (gift attaches to recipient on phone verify) — in the app, the keystone next build.
+- "Gift opened" event: the web page could later log an "opened" event by token to notify the giver — NOT built yet.
+- Account creation / gift-claiming is NOT on this page (app-side). The page is read-only playback + get-the-app CTA.
+
+See justin-build-roadmap.md (master cross-project map) for the full picture.
