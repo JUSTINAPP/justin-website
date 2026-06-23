@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy — Justin',
+  description: 'How Justin collects, uses, and protects your personal information.',
 };
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -30,7 +31,7 @@ export default function PrivacyPage() {
   return (
     <div style={{ minHeight: '100vh', background: 'white' }}>
 
-      {/* ── Header — matches Nav ── */}
+      {/* Header */}
       <header
         style={{
           position: 'sticky',
@@ -54,7 +55,7 @@ export default function PrivacyPage() {
         </div>
       </header>
 
-      {/* ── Content ── */}
+      {/* Content */}
       <main style={{ maxWidth: 720, margin: '0 auto', padding: '56px 32px 96px' }}>
         <h1
           style={{
@@ -68,220 +69,120 @@ export default function PrivacyPage() {
         >
           Privacy Policy
         </h1>
-        <p style={{ fontSize: 14, color: '#8a8195', margin: '0 0 52px' }}>Last updated: June 2025</p>
+        <p style={{ fontSize: 14, color: '#8a8195', margin: '0 0 52px' }}>Last updated: 23 June 2026</p>
 
-        <Section title="1. Introduction">
+        <p style={{ color: '#5a4f6b', lineHeight: 1.75, marginBottom: 44 }}>
+          Justin is operated by Hecktown Pty Ltd (ABN 90 083 211 821), 17 Charles St, Redfern NSW 2016,
+          Australia ("we", "us", "our"). This policy explains what personal information the Justin app
+          collects, how we use it, and your choices. By using Justin you agree to this policy.
+        </p>
+        <p style={{ color: '#5a4f6b', lineHeight: 1.75, marginBottom: 52 }}>
+          We built Justin to help people share voice messages with the people they love. We collect only
+          what we need to provide that service. We do not sell your data, show advertising, or use
+          third-party analytics or tracking.
+        </p>
+
+        <Section title="Information we collect">
+          <p>When you use Justin, we collect:</p>
+          <ul style={{ margin: 0, paddingLeft: 22, display: 'flex', flexDirection: 'column', gap: 6 }}>
+            <li><strong style={{ color: '#4A3B6B' }}>Your phone number</strong> — used to create and verify your account (via a one-time code) and to connect gifts to the right person.</li>
+            <li><strong style={{ color: '#4A3B6B' }}>Your name</strong> — the display name you choose, shown to people you send gifts to.</li>
+            <li><strong style={{ color: '#4A3B6B' }}>Voice recordings</strong> — the audio messages you record as gifts.</li>
+            <li><strong style={{ color: '#4A3B6B' }}>Photos</strong> — any images you attach to a gift.</li>
+            <li><strong style={{ color: '#4A3B6B' }}>Written messages</strong> — any captions or text you add to a gift.</li>
+            <li><strong style={{ color: '#4A3B6B' }}>People you add</strong> — the names, phone numbers, relationships, notes, and important dates you save for the people you want to send gifts to. This information is private to you.</li>
+          </ul>
           <p>
-            Justin App Pty Ltd ("Justin", "we", "us", or "our") is committed to protecting your
-            privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard
-            your information when you use the Justin mobile application and related services
-            (collectively, the "Service").
-          </p>
-          <p>
-            Justin is a personal emotional support application that allows users to invite trusted
-            people (a "support network") to leave private messages, voice notes, photos, and short
-            videos — accessible to the user when they need support. We take the sensitivity of this
-            information seriously.
-          </p>
-          <p>
-            By using the Service, you agree to the collection and use of information in accordance
-            with this policy. If you do not agree, please do not use the Service.
+            We do not collect location data, contacts from your device address book, advertising
+            identifiers, or browsing activity. We do not use third-party analytics or tracking tools.
           </p>
         </Section>
 
-        <Section title="2. Information We Collect">
-          <p>We collect the following categories of information:</p>
+        <Section title="How we use your information">
+          <p>We use your information only to provide and operate Justin:</p>
+          <ul style={{ margin: 0, paddingLeft: 22, display: 'flex', flexDirection: 'column', gap: 6 }}>
+            <li>To create and secure your account.</li>
+            <li>To deliver the voice gifts you create to the people you choose.</li>
+            <li>To let gifts you send reach someone when they join Justin (matched by phone number).</li>
+            <li>To show you reminders for important dates you have saved.</li>
+            <li>To respond to support requests.</li>
+          </ul>
+          <p>We do not use your information for advertising, profiling, or sale to third parties.</p>
+        </Section>
+
+        <Section title="How your information is stored">
           <p>
-            <strong style={{ color: '#4A3B6B' }}>Account information:</strong> When you register,
-            we collect your name, email address, and date of birth. This is used to create and
-            manage your account.
-          </p>
-          <p>
-            <strong style={{ color: '#4A3B6B' }}>Support network information:</strong> To invite
-            people to your support network, you provide their name and contact details (email or
-            phone number). These individuals do not need to create an account. We use this
-            information solely to deliver your invitation.
-          </p>
-          <p>
-            <strong style={{ color: '#4A3B6B' }}>User-generated content:</strong> Voice notes,
-            photographs, short videos, and text messages uploaded by your support network members
-            on your behalf are stored on our servers and associated with your account.
-          </p>
-          <p>
-            <strong style={{ color: '#4A3B6B' }}>Usage data:</strong> We may collect anonymised
-            information about how you interact with the Service (e.g., which features you use,
-            session duration) to improve the app. This data cannot be used to identify you
-            individually.
-          </p>
-          <p>
-            <strong style={{ color: '#4A3B6B' }}>Device information:</strong> We collect your
-            device type, operating system version, and push notification token to deliver
-            notifications and ensure compatibility.
+            Your information is stored using Supabase, our backend and database provider, which hosts
+            data securely on our behalf. Voice recordings and photos are stored in private storage. We
+            take reasonable steps to protect your information, though no method of transmission or
+            storage is completely secure.
           </p>
         </Section>
 
-        <Section title="3. How We Use Your Information">
-          <p>We use the information we collect to:</p>
-          <ul className="list-disc pl-6 space-y-1">
-            <li>Provide, operate, and maintain the Service</li>
-            <li>Send you push notifications when support network members add new content</li>
+        <Section title="Sharing your information">
+          <p>We do not sell or rent your personal information. We share information only:</p>
+          <ul style={{ margin: 0, paddingLeft: 22, display: 'flex', flexDirection: 'column', gap: 6 }}>
+            <li><strong style={{ color: '#4A3B6B' }}>With the people you choose</strong> — when you send a voice gift, its contents are made available to that recipient.</li>
+            <li><strong style={{ color: '#4A3B6B' }}>With service providers</strong> — such as Supabase (data hosting) and Apple (sign-in verification and app distribution), only as needed to operate the app.</li>
+            <li><strong style={{ color: '#4A3B6B' }}>Where required by law</strong> — if compelled by a valid legal request.</li>
+          </ul>
+        </Section>
+
+        <Section title="Your choices and rights">
+          <ul style={{ margin: 0, paddingLeft: 22, display: 'flex', flexDirection: 'column', gap: 8 }}>
             <li>
-              Quietly notify support network members when you open Justin (as part of the
-              core support loop)
+              <strong style={{ color: '#4A3B6B' }}>Delete your account</strong> — you can permanently
+              delete your account and your data from within the app at any time. When you delete your
+              account, the gifts you received and your saved people, dates, and notes are removed. Gifts
+              you have already given to others remain with those recipients, shown from a former user.
             </li>
-            <li>Respond to your enquiries and provide customer support</li>
-            <li>Improve and personalise the Service based on aggregated usage patterns</li>
-            <li>Comply with legal obligations</li>
+            <li>
+              <strong style={{ color: '#4A3B6B' }}>Access or correct your information</strong> — you can
+              edit your name and account details in the app, or contact us.
+            </li>
+            <li>
+              <strong style={{ color: '#4A3B6B' }}>Block</strong> — you can block another user so their
+              gifts no longer reach you.
+            </li>
           </ul>
           <p>
-            We do not sell, trade, or rent your personal information to any third party, and we
-            do not use your content for advertising or profiling purposes.
-          </p>
-        </Section>
-
-        <Section title="4. Voice Notes, Photos, and Videos">
-          <p>
-            Messages left by your support network — including voice notes, photos, and short
-            videos — are stored securely and are only accessible to you. Support network members
-            cannot view, edit, or delete content once it has been submitted.
-          </p>
-          <p>
-            All content is encrypted in transit using TLS and stored encrypted at rest. We do
-            not review, listen to, or analyse the content of these messages.
-          </p>
-          <p>
-            You may delete individual messages or your entire account at any time (see Section 8).
-            Upon account deletion, all associated content is permanently removed from our servers
-            within 30 days.
-          </p>
-        </Section>
-
-        <Section title="5. Your Support Network">
-          <p>
-            The people you invite to your support network are not required to create a Justin
-            account. We use their contact details only to send the initial invitation link.
-            We do not store their contact information beyond what is necessary to manage your
-            support network.
-          </p>
-          <p>
-            Support network members are informed, at the point of uploading content, that their
-            message will be stored and delivered to you, and that they are contributing to a
-            personal support resource. No other use is made of their data.
-          </p>
-        </Section>
-
-        <Section title="6. Data Storage and Security">
-          <p>
-            Your data is stored on servers located in Australia and/or the United States,
-            operated by reputable cloud infrastructure providers. We implement
-            industry-standard technical and organisational measures to protect your information
-            against unauthorised access, disclosure, alteration, or destruction.
-          </p>
-          <p>
-            No method of transmission over the internet or electronic storage is 100% secure.
-            While we strive to protect your personal information, we cannot guarantee its
-            absolute security. In the event of a data breach that is likely to result in serious
-            harm, we will notify affected users and relevant authorities as required by law.
-          </p>
-        </Section>
-
-        <Section title="7. Data Retention">
-          <p>
-            We retain your personal information and content for as long as your account is
-            active. If you have not logged in for 24 consecutive months, we may contact you to
-            confirm whether you wish to continue using the Service.
-          </p>
-          <p>
-            Upon account deletion, we permanently erase your personal data and all associated
-            content within 30 days, except where we are required to retain certain records by law.
-          </p>
-        </Section>
-
-        <Section title="8. Your Rights">
-          <p>Depending on your jurisdiction, you may have the right to:</p>
-          <ul className="list-disc pl-6 space-y-1">
-            <li>Access the personal information we hold about you</li>
-            <li>Request correction of inaccurate or incomplete information</li>
-            <li>Request deletion of your account and associated data</li>
-            <li>Object to or restrict certain processing of your information</li>
-            <li>Receive a portable copy of your data</li>
-          </ul>
-          <p>
-            To exercise any of these rights, contact us at{' '}
-            <a href="mailto:hello@justinapp.com.au" className="text-brand-purple hover:underline">
+            To make a privacy request or ask a question, contact us at{' '}
+            <a href="mailto:hello@justinapp.com.au" style={{ color: '#7B6BA8' }}>
               hello@justinapp.com.au
             </a>
-            . We will respond within 30 days.
+            .
           </p>
         </Section>
 
-        <Section title="9. Children's Privacy">
+        <Section title="Children">
           <p>
-            Justin is not intended for children under the age of 13. We do not knowingly collect
-            personal information from children under 13. If you believe we have inadvertently
-            collected such information, please contact us and we will delete it promptly.
-          </p>
-          <p>
-            For users aged 13–17, we recommend parental or guardian awareness of the Service.
-            Support network invitations for minors should include a trusted adult.
+            Justin is not intended for children under 13 (or the minimum age in your country). We do not
+            knowingly collect information from children under that age. If you believe a child has
+            provided us information, contact us and we will remove it.
           </p>
         </Section>
 
-        <Section title="10. Mental Health Disclaimer">
+        <Section title="Changes to this policy">
           <p>
-            Justin is a personal support and wellbeing tool. It is not a medical device, clinical
-            service, or substitute for professional mental health care. The content provided
-            through Justin is not reviewed by mental health professionals and does not constitute
-            medical advice.
-          </p>
-          <p>
-            If you are experiencing a mental health crisis or emergency, please contact a
-            professional service immediately — in Australia, call Lifeline on{' '}
-            <strong>13 11 14</strong> or Beyond Blue on <strong>1300 22 4636</strong>.
+            We may update this policy from time to time. We will post the updated version here with a
+            new "last updated" date.
           </p>
         </Section>
 
-        <Section title="11. Third-Party Services">
+        <Section title="Contact">
           <p>
-            We may use third-party services for analytics, push notifications, and cloud
-            infrastructure. These providers are contractually bound to use your data only as
-            directed by us and in accordance with this policy. We do not allow third parties to
-            use your personal information for their own purposes.
-          </p>
-        </Section>
-
-        <Section title="12. Changes to This Policy">
-          <p>
-            We may update this Privacy Policy from time to time. When we do, we will revise the
-            "Last updated" date at the top of this page and, where the changes are material,
-            notify you via email or in-app notification. Your continued use of the Service after
-            any changes constitutes acceptance of the revised policy.
-          </p>
-        </Section>
-
-        <Section title="13. Contact Us">
-          <p>
-            If you have questions, concerns, or complaints about this Privacy Policy or our
-            privacy practices, please contact us:
+            Hecktown Pty Ltd, 17 Charles St, Redfern NSW 2016, Australia. ABN 90 083 211 821.
           </p>
           <p>
-            <strong style={{ color: '#2e2540' }}>Justin App Pty Ltd</strong>
-            <br />
             Email:{' '}
-            <a href="mailto:hello@justinapp.com.au" className="text-brand-purple hover:underline">
+            <a href="mailto:hello@justinapp.com.au" style={{ color: '#7B6BA8' }}>
               hello@justinapp.com.au
             </a>
-          </p>
-          <p>
-            We are committed to resolving privacy concerns promptly and fairly. If you are
-            located in Australia and are not satisfied with our response, you may lodge a
-            complaint with the Office of the Australian Information Commissioner (OAIC) at
-            www.oaic.gov.au.
           </p>
         </Section>
       </main>
 
-      {/* ── Footer — matches main site Footer ── */}
+      {/* Footer */}
       <footer style={{ background: '#241c33' }} className="py-10">
         <div
           className="wrap"
