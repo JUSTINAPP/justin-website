@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy — Justin',
+  title: 'Privacy Policy - Justin',
   description: 'How Justin collects, uses, and protects your personal information.',
 };
 
@@ -71,7 +71,7 @@ export default function PrivacyPage() {
         </h1>
         <p style={{ fontSize: 14, color: '#8a8195', margin: '0 0 52px' }}>Last updated: 23 June 2026</p>
 
-        <p style={{ color: '#5a4f6b', lineHeight: 1.75, marginBottom: 44 }}>
+        <p style={{ color: '#5a4f6b', lineHeight: 1.75, marginBottom: 24 }}>
           Justin is operated by Hecktown Pty Ltd (ABN 90 083 211 821), 17 Charles St, Redfern NSW 2016,
           Australia ("we", "us", "our"). This policy explains what personal information the Justin app
           collects, how we use it, and your choices. By using Justin you agree to this policy.
@@ -85,12 +85,12 @@ export default function PrivacyPage() {
         <Section title="Information we collect">
           <p>When you use Justin, we collect:</p>
           <ul style={{ margin: 0, paddingLeft: 22, display: 'flex', flexDirection: 'column', gap: 6 }}>
-            <li><strong style={{ color: '#4A3B6B' }}>Your phone number</strong> — used to create and verify your account (via a one-time code) and to connect gifts to the right person.</li>
-            <li><strong style={{ color: '#4A3B6B' }}>Your name</strong> — the display name you choose, shown to people you send gifts to.</li>
-            <li><strong style={{ color: '#4A3B6B' }}>Voice recordings</strong> — the audio messages you record as gifts.</li>
-            <li><strong style={{ color: '#4A3B6B' }}>Photos</strong> — any images you attach to a gift.</li>
-            <li><strong style={{ color: '#4A3B6B' }}>Written messages</strong> — any captions or text you add to a gift.</li>
-            <li><strong style={{ color: '#4A3B6B' }}>People you add</strong> — the names, phone numbers, relationships, notes, and important dates you save for the people you want to send gifts to. This information is private to you.</li>
+            <li><strong style={{ color: '#4A3B6B' }}>Your phone number:</strong> used to create and verify your account (via a one-time code) and to connect gifts to the right person.</li>
+            <li><strong style={{ color: '#4A3B6B' }}>Your name:</strong> the display name you choose, shown to people you send gifts to.</li>
+            <li><strong style={{ color: '#4A3B6B' }}>Voice recordings:</strong> the audio messages you record as gifts.</li>
+            <li><strong style={{ color: '#4A3B6B' }}>Photos:</strong> any images you attach to a gift.</li>
+            <li><strong style={{ color: '#4A3B6B' }}>Written messages:</strong> any captions or text you add to a gift.</li>
+            <li><strong style={{ color: '#4A3B6B' }}>People you add:</strong> the names, phone numbers, relationships, notes, and important dates you save for the people you want to send gifts to. This information is private to you.</li>
           </ul>
           <p>
             We do not collect location data, contacts from your device address book, advertising
@@ -122,26 +122,26 @@ export default function PrivacyPage() {
         <Section title="Sharing your information">
           <p>We do not sell or rent your personal information. We share information only:</p>
           <ul style={{ margin: 0, paddingLeft: 22, display: 'flex', flexDirection: 'column', gap: 6 }}>
-            <li><strong style={{ color: '#4A3B6B' }}>With the people you choose</strong> — when you send a voice gift, its contents are made available to that recipient.</li>
-            <li><strong style={{ color: '#4A3B6B' }}>With service providers</strong> — such as Supabase (data hosting) and Apple (sign-in verification and app distribution), only as needed to operate the app.</li>
-            <li><strong style={{ color: '#4A3B6B' }}>Where required by law</strong> — if compelled by a valid legal request.</li>
+            <li><strong style={{ color: '#4A3B6B' }}>With the people you choose:</strong> when you send a voice gift, its contents are made available to that recipient.</li>
+            <li><strong style={{ color: '#4A3B6B' }}>With service providers:</strong> such as Supabase (data hosting) and Apple (sign-in verification and app distribution), only as needed to operate the app.</li>
+            <li><strong style={{ color: '#4A3B6B' }}>Where required by law:</strong> if compelled by a valid legal request.</li>
           </ul>
         </Section>
 
         <Section title="Your choices and rights">
           <ul style={{ margin: 0, paddingLeft: 22, display: 'flex', flexDirection: 'column', gap: 8 }}>
             <li>
-              <strong style={{ color: '#4A3B6B' }}>Delete your account</strong> — you can permanently
+              <strong style={{ color: '#4A3B6B' }}>Delete your account:</strong> you can permanently
               delete your account and your data from within the app at any time. When you delete your
               account, the gifts you received and your saved people, dates, and notes are removed. Gifts
               you have already given to others remain with those recipients, shown from a former user.
             </li>
             <li>
-              <strong style={{ color: '#4A3B6B' }}>Access or correct your information</strong> — you can
+              <strong style={{ color: '#4A3B6B' }}>Access or correct your information:</strong> you can
               edit your name and account details in the app, or contact us.
             </li>
             <li>
-              <strong style={{ color: '#4A3B6B' }}>Block</strong> — you can block another user so their
+              <strong style={{ color: '#4A3B6B' }}>Block:</strong> you can block another user so their
               gifts no longer reach you.
             </li>
           </ul>
