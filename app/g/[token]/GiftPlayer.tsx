@@ -319,16 +319,39 @@ export default function GiftPlayer({ gift, token }: { gift: GiftData; token: str
             </div>
           </a>
 
-          {/* Gift code — quiet, tap-to-copy, shown on all states when present */}
+          {/* Gift code — instruction + prominent monospaced code, tap to copy */}
           {claimCode && (
-            <button
-              onClick={copyCode}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '2px 8px' }}
-            >
-              <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: 10 }}>
-                {codeCopied ? 'Copied!' : `Gift code ${claimCode}`}
-              </span>
-            </button>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, marginTop: 2 }}>
+              <p style={{
+                color: 'rgba(255,255,255,0.75)', fontSize: 12, fontWeight: 400,
+                textAlign: 'center', margin: 0, lineHeight: 1.4,
+              }}>
+                Download Justin, then enter this code to find your gift:
+              </p>
+              <button
+                onClick={copyCode}
+                style={{
+                  background: 'rgba(255,255,255,0.1)',
+                  border: '1px solid rgba(255,255,255,0.28)',
+                  borderRadius: 10,
+                  cursor: 'pointer',
+                  padding: '10px 18px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 8,
+                }}
+              >
+                <span style={{
+                  fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
+                  color: 'white', fontSize: 22, fontWeight: 700, letterSpacing: '0.1em',
+                }}>
+                  {claimCode}
+                </span>
+                <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: 11 }}>
+                  {codeCopied ? 'Copied' : 'tap to copy'}
+                </span>
+              </button>
+            </div>
           )}
 
         </div>
