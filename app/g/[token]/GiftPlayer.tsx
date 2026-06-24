@@ -298,22 +298,22 @@ export default function GiftPlayer({ gift, token }: { gift: GiftData; token: str
             href={APP_STORE_URL}
             style={{
               display: 'inline-flex', flexDirection: 'row',
-              alignItems: 'center', gap: 10,
+              alignItems: 'center', gap: 12,
               background: 'white', borderRadius: 14,
               padding: '11px 22px', textDecoration: 'none',
               boxShadow: '0 4px 24px rgba(0,0,0,0.2)',
             }}
           >
             <Image
-              src="/Apple-Logo-1536x864.png"
-              alt="" width={1536} height={864}
-              style={{ height: 28, width: 'auto', display: 'block', flexShrink: 0 }}
+              src="/Apple-Logo-cropped.png"
+              alt="" width={719} height={840}
+              style={{ height: 26, width: 'auto', display: 'block', flexShrink: 0 }}
             />
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-              <span style={{ color: 'rgba(46,37,64,0.45)', fontSize: 9, fontWeight: 400, whiteSpace: 'nowrap' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 2 }}>
+              <span style={{ color: 'rgba(46,37,64,0.45)', fontSize: 9, fontWeight: 400, lineHeight: 1, whiteSpace: 'nowrap' }}>
                 Free on iPhone
               </span>
-              <span style={{ color: '#2e2540', fontSize: 14, fontWeight: 500, whiteSpace: 'nowrap' }}>
+              <span style={{ color: '#2e2540', fontSize: 14, fontWeight: 500, lineHeight: 1, whiteSpace: 'nowrap' }}>
                 Download Justin
               </span>
             </div>
@@ -343,7 +343,7 @@ export default function GiftPlayer({ gift, token }: { gift: GiftData; token: str
               >
                 <span style={{
                   fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
-                  color: 'white', fontSize: 22, fontWeight: 700, letterSpacing: '0.1em',
+                  color: 'white', fontSize: 16, fontWeight: 700, letterSpacing: '0.1em',
                 }}>
                   {claimCode}
                 </span>
