@@ -125,8 +125,8 @@ export default function TermsPage() {
           </p>
           <p>
             You agree to notify us immediately at{' '}
-            <a href="mailto:hello@justinapp.com.au" className="text-brand-purple hover:underline">
-              hello@justinapp.com.au
+            <a href="mailto:justintimetouch@gmail.com" className="text-brand-purple hover:underline">
+              justintimetouch@gmail.com
             </a>{' '}
             if you suspect any unauthorised access to your account. We are not liable for any
             loss arising from your failure to safeguard your account.
@@ -284,8 +284,8 @@ export default function TermsPage() {
             <strong style={{ color: '#2e2540' }}>Justin App Pty Ltd</strong>
             <br />
             Email:{' '}
-            <a href="mailto:hello@justinapp.com.au" className="text-brand-purple hover:underline">
-              hello@justinapp.com.au
+            <a href="mailto:justintimetouch@gmail.com" className="text-brand-purple hover:underline">
+              justintimetouch@gmail.com
             </a>
           </p>
         </Section>
@@ -309,8 +309,8 @@ export default function TermsPage() {
             <span>·</span>
             <Link href="/terms" style={{ color: 'inherit', textDecoration: 'none' }}>Terms</Link>
             <span>·</span>
-            <a href="mailto:hello@justinapp.com.au" style={{ color: 'inherit', textDecoration: 'none' }}>
-              hello@justinapp.com.au
+            <a href="mailto:justintimetouch@gmail.com" style={{ color: 'inherit', textDecoration: 'none' }}>
+              justintimetouch@gmail.com
             </a>
           </div>
           <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: 12, fontStyle: 'italic', margin: 0 }}>

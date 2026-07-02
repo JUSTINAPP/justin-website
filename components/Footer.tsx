@@ -19,8 +19,8 @@ export default function Footer() {
           <span>·</span>
           <a href="/terms" style={{ color: 'inherit', textDecoration: 'none' }}>Terms</a>
           <span>·</span>
-          <a href="mailto:hello@justinapp.com.au" style={{ color: 'inherit', textDecoration: 'none' }}>
-            hello@justinapp.com.au
+          <a href="mailto:justintimetouch@gmail.com" style={{ color: 'inherit', textDecoration: 'none' }}>
+            justintimetouch@gmail.com
           </a>
         </div>
 

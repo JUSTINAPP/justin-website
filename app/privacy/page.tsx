@@ -147,8 +147,8 @@ export default function PrivacyPage() {
           </ul>
           <p>
             To make a privacy request or ask a question, contact us at{' '}
-            <a href="mailto:hello@justinapp.com.au" style={{ color: '#7B6BA8' }}>
-              hello@justinapp.com.au
+            <a href="mailto:justintimetouch@gmail.com" style={{ color: '#7B6BA8' }}>
+              justintimetouch@gmail.com
             </a>
             .
           </p>
@@ -175,8 +175,8 @@ export default function PrivacyPage() {
           </p>
           <p>
             Email:{' '}
-            <a href="mailto:hello@justinapp.com.au" style={{ color: '#7B6BA8' }}>
-              hello@justinapp.com.au
+            <a href="mailto:justintimetouch@gmail.com" style={{ color: '#7B6BA8' }}>
+              justintimetouch@gmail.com
             </a>
           </p>
         </Section>
@@ -200,8 +200,8 @@ export default function PrivacyPage() {
             <span>·</span>
             <Link href="/terms" style={{ color: 'inherit', textDecoration: 'none' }}>Terms</Link>
             <span>·</span>
-            <a href="mailto:hello@justinapp.com.au" style={{ color: 'inherit', textDecoration: 'none' }}>
-              hello@justinapp.com.au
+            <a href="mailto:justintimetouch@gmail.com" style={{ color: 'inherit', textDecoration: 'none' }}>
+              justintimetouch@gmail.com
             </a>
           </div>
           <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: 12, fontStyle: 'italic', margin: 0 }}>
